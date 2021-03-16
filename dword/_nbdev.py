@@ -2,10 +2,18 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"crop_video": "00_utils.ipynb",
-         "play_video": "00_utils.ipynb"}
+index = {"get_video_list": "00_utils.ipynb",
+         "download_video": "00_utils.ipynb",
+         "download_all_videos": "00_utils.ipynb",
+         "download_youtube_video": "00_utils.ipynb",
+         "get_credits": "00_utils.ipynb",
+         "crop_video": "00_utils.ipynb",
+         "get_resolution": "00_utils.ipynb",
+         "get_fps": "00_utils.ipynb",
+         "generate_video": "01_core.ipynb"}
 
-modules = ["utils.py"]
+modules = ["utils.py",
+           "core.py"]
 
 doc_url = "https://deepword18.github.io/dword/"
 

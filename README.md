@@ -8,19 +8,13 @@ We hope you enjoy this project
 
 `pip install dword`
 
-## How to use
+## Quick start
 
-You can use the `play_video` function to display a video
+You can use the `generate_video` function to create a synthetic video
 
 ```python
-play_video('Anna.mp4')
+generate_video('Anna.mp4', 'audio.mp3', 'myoutput.mp4')
 ```
 
-
-
-
-<video src="Anna.mp4" controls  width="400"  height="400">
-      Your browser does not support the <code>video</code> element.
-    </video>
-
+    Successfully generated video!
 

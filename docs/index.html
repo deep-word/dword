@@ -51,13 +51,13 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2>
+<h2 id="Quick-start">Quick start<a class="anchor-link" href="#Quick-start"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can use the <a href="/dword/utils.html#play_video"><code>play_video</code></a> function to display a video</p>
+<p>You can use the <a href="/dword/core.html#generate_video"><code>generate_video</code></a> function to create a synthetic video</p>
 
 </div>
 </div>
@@ -69,7 +69,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">play_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">generate_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">,</span> <span class="s1">&#39;audio.mp3&#39;</span><span class="p">,</span> <span class="s1">&#39;myoutput.mp4&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -81,13 +81,10 @@ nb_path: "index.ipynb"
 
 <div class="output_area">
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<video src="Anna.mp4" controls  width="400"  height="400">
-      Your browser does not support the <code>video</code> element.
-    </video>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Successfully generated video!
+</pre>
 </div>
-
 </div>
 
 </div>

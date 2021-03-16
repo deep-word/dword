@@ -1,6 +1,7 @@
 {
   "dword": {
     "Overview": "/",
-    "module name here": "utils.html"
+    "Utility functions": "utils.html",
+    "core functions": "core.html"
   }
 }

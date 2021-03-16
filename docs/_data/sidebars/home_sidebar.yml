@@ -10,8 +10,11 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: Utility functions
       url: utils.html
+    - output: web,pdf
+      title: core functions
+      url: core.html
     output: web
     title: dword
   output: web
