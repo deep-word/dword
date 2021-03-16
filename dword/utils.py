@@ -55,8 +55,7 @@ def crop_audio(audio, start, end, outfile = None):
 # Cell
 def get_resolution(video):
     "Get the resolution of a video"
-    video = Path(video)
-    if not video.exists():
+    if not _file_exists(video):
         raise FileNotFoundError(f'{video} was not found, make sure you provide the correct file path')
     else:
         cmd = f'ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=nw=1:nk=1 {video}'
@@ -64,12 +63,14 @@ def get_resolution(video):
             op = subprocess.check_output(cmd, shell = True)
         except CalledProcessError as e:
             print(e.output)
-    h,w,_ = op.decode('utf-8').split('\n')
-    return int(h), int(w)
+        h,w,_ = op.decode('utf-8').split('\n')
+        return int(h), int(w)
 
 # Cell
 def get_fps(video):
     "Get the fps of a video"
+    if not _file_exists(video):
+        raise FileNotFoundError(f'{video} was not found, make sure you provide the correct file path')
     cmd = f'ffprobe -v error -select_streams v -of default=noprint_wrappers=1:nokey=1 -show_entries stream=r_frame_rate {video}'
     try:
         op = subprocess.check_output(cmd, shell = True).decode('utf-8')
