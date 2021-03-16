@@ -2,6 +2,15 @@
 > An amazing library to create synthetic videos
 
 
+```python
+%load_ext autoreload
+%autoreload 2
+```
+
+    The autoreload extension is already loaded. To reload it, use:
+      %reload_ext autoreload
+
+
 We hope you enjoy this project
 
 ## Install

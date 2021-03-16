@@ -5,32 +5,55 @@ __all__ = ['get_video_list', 'download_video', 'download_all_videos', 'download_
 
 # Cell
 def get_video_list():
+    "Get a list of all generated videos from your deep word account"
     raise NotImplementedError
 
 # Cell
 def download_video():
+    "Download synthetic video generated in your deep word account"
     raise NotImplementedError
 
 # Cell
 def download_all_videos():
+    "Download all the synthetic videos from your deep word account"
     raise NotImplementedError
 
 # Cell
-def download_youtube_video():
+def download_youtube_video(url):
+    "Download a youtube video from it's url"
     raise NotImplementedError
 
 # Cell
 def get_credits():
+    "Get the number of credits left in your deep word account"
     raise NotImplementedError
 
 # Cell
 def crop_video(video, start, end, outfile = None):
+    """
+    Crop a video in place from start to end. If you don't want to crop inplace, provide output filename.
+    For youtube videos you can `download_youtube_video` before cropping it
+    """
     raise NotImplementedError
 
 # Cell
-def get_resolution():
-    raise NotImplementedError
+import subprocess
+
+def get_resolution(video):
+    "Get the resolution of a video"
+    cmd = f'ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=nw=1:nk=1 {video}'
+    op = subprocess.check_output(cmd, shell = True)
+    h,w,_ = op.decode('utf-8').split('\n')
+    return int(h), int(w)
 
 # Cell
-def get_fps():
-    raise NotImplementedError
+def get_fps(video):
+    "Get the fps of a video"
+    cmd = f'ffprobe -v error -select_streams v -of default=noprint_wrappers=1:nokey=1 -show_entries stream=r_frame_rate {video}'
+    try:
+        op = subprocess.check_output(cmd, shell = True).decode('utf-8')
+    except CalledProcessError as e:
+        print(e.output)
+    op = op.strip().split('/')
+    op = list(map(int, op))
+    return round(op[0] / op[1]) if op[1] != 0 else None

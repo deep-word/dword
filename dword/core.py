@@ -4,9 +4,5 @@ __all__ = ['generate_video']
 
 # Cell
 def generate_video(video, audio, outfile):
-    """
-    Args:
-        video: Can be one of ``path to local video``, ``video actor name``, ``youtube url``
-        audio: Can be one of ``path to local audio``, ``audio sample name``
-    """
+    "Generate a synthetic video using deep word"
     return 'Successfully generated video!'
