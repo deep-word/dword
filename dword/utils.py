@@ -41,8 +41,15 @@ import subprocess
 
 def get_resolution(video):
     "Get the resolution of a video"
-    cmd = f'ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=nw=1:nk=1 {video}'
-    op = subprocess.check_output(cmd, shell = True)
+    video = Path(video)
+    if not video.exists():
+        raise FileNotFoundError(f'{video} was not found, make sure you provide the correct file path')
+    else:
+        cmd = f'ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=nw=1:nk=1 {video}'
+        try:
+            op = subprocess.check_output(cmd, shell = True)
+        except CalledProcessError as e:
+            print(e.output)
     h,w,_ = op.decode('utf-8').split('\n')
     return int(h), int(w)
 
