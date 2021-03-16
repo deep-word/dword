@@ -1,16 +1,16 @@
 # Welcome to dword
-> An amazing tutorial
+> An amazing library to create synthetic videos
 
 
 We hope you enjoy this project
 
 ## Install
 
-`pip install your_project_name`
+`pip install dword`
 
 ## How to use
 
-Fill me in please! Don't forget code examples:
+You can use the `play_video` function to display a video
 
 ```python
 play_video('Anna.mp4')
