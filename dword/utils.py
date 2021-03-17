@@ -6,6 +6,9 @@ __all__ = ['get_video_list', 'download_video', 'download_all_videos', 'download_
 # Cell
 import subprocess
 from subprocess import CalledProcessError
+from nbdev.showdoc import *
+from pathlib import Path
+import os
 
 # Cell
 def get_video_list():

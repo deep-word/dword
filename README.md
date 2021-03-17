@@ -13,9 +13,15 @@
 
 We hope you enjoy this project
 
-## Install
+## Installation
 
-`pip install dword`
+1. Install the dword library
+
+```
+pip install dword
+```
+
+2. Make sure you have [ffmpeg installed.](https://ffmpeg.org/download.html)
 
 ## Quick start
 
