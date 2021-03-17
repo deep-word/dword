@@ -2,16 +2,16 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"get_video_list": "00_utils.ipynb",
+index = {"get_credits": "00_utils.ipynb",
+         "get_video_list": "00_utils.ipynb",
          "download_video": "00_utils.ipynb",
          "download_all_videos": "00_utils.ipynb",
          "download_youtube_video": "00_utils.ipynb",
          "text_to_speech": "00_utils.ipynb",
-         "get_credits": "00_utils.ipynb",
-         "crop_video": "00_utils.ipynb",
-         "crop_audio": "00_utils.ipynb",
+         "trim_video": "00_utils.ipynb",
          "get_resolution": "00_utils.ipynb",
          "get_fps": "00_utils.ipynb",
+         "trim_audio": "00_utils.ipynb",
          "generate_video": "01_core.ipynb"}
 
 modules = ["utils.py",
