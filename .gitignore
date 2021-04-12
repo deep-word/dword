@@ -1,4 +1,5 @@
 *.bak
+dword/config.py
 .gitattributes
 .last_checked
 .gitconfig
