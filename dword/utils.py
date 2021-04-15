@@ -19,6 +19,7 @@ class URLs:
     download_yt_vid_url = f'{base}/api_download_youtube_video/'
     generate_vid_url = f'{base}/generate_video_api'
     validate_token_url = f'{base}/check_apikey'
+    api_get_sample_file = f'{base}/api_get_sample_file'
 
 # Cell
 def trim_video(video, start, end, outfile = None):

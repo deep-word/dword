@@ -29,13 +29,13 @@ nb_path: "index.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We hope you enjoy this project</p>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
-</div>
-</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2>
@@ -70,13 +70,9 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Quick-start">Quick start<a class="anchor-link" href="#Quick-start"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>You can use the <code>generate_video</code> function to create a synthetic video</p>
+<h2 id="Quick-start">Quick start<a class="anchor-link" href="#Quick-start"> </a></h2><p>Start by <a href="https://login.deepword.co/user/signin">logging into your DeepWord account</a> and generating API keys</p>
+<p><img src="/dword/images/api_key.png" alt="test_image"></p>
+<p>Use these keys to login to your account in Python</p>
 
 </div>
 </div>
@@ -88,7 +84,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">generate_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">,</span> <span class="s1">&#39;audio.mp3&#39;</span><span class="p">,</span> <span class="s1">&#39;myoutput.mp4&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">DeepWord</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -101,7 +97,7 @@ nb_path: "index.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully generated video!
+<pre>login successful
 </pre>
 </div>
 </div>
@@ -112,6 +108,13 @@ nb_path: "index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>That's it!!!</strong> Now you can start creating videos. We have many options for choosing a video or an audio. The process for each is shown below.</p>
+
+</div>
+</div>
+</div>
 </div>
  
 

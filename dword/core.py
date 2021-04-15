@@ -75,39 +75,46 @@ class DeepWord:
         except:
             raise ValueError(response.text)
 
-    def text_to_speech(self, text: str, speaker: str, gender: str, code: str, outfile = None) -> str:
+    def text_to_speech(self, text: str, speaker: str = None, gender: str = None, code: str = None, outfile = 'text2speech.mp3') -> str:
         "Get audio from text using speaker's voice. Output will be stored as outfile"
-
         # users have to find a simple way to select a speaker like we have on the website with names
+        # convert these to set for faster checking
         valid_speakers = ["ar-XA-Wavenet-A","ar-XA-Wavenet-B","ar-XA-Wavenet-C","ar-XA-Standard-A","ar-XA-Standard-B","ar-XA-Standard-C","ar-XA-Standard-D","bn-IN-Standard-A","bn-IN-Standard-B","yue-HK-Standard-A","yue-HK-Standard-B","yue-HK-Standard-C","yue-HK-Standard-D","cs-CZ-Wavenet-A","cs-CZ-Standard-A","da-DK-Wavenet-A","da-DK-Wavenet-C","da-DK-Wavenet-D","da-DK-Wavenet-E","da-DK-Standard-A","da-DK-Standard-C","da-DK-Standard-D","da-DK-Standard-E","nl-NL-Wavenet-A","nl-NL-Wavenet-B","nl-NL-Wavenet-C","nl-NL-Wavenet-D","nl-NL-Wavenet-E","nl-NL-Standard-A","nl-NL-Standard-B","nl-NL-Standard-C","nl-NL-Standard-D","nl-NL-Standard-E","en-AU-Wavenet-A","en-AU-Wavenet-B","en-AU-Wavenet-C","en-AU-Wavenet-D","en-AU-Standard-A","en-AU-Standard-B","en-AU-Standard-C","en-AU-Standard-D","en-IN-Wavenet-A","en-IN-Wavenet-B","en-IN-Wavenet-C","en-IN-Wavenet-D","en-IN-Standard-A","en-IN-Standard-B","en-IN-Standard-C","en-IN-Standard-D","en-GB-Wavenet-A","en-GB-Wavenet-B","en-GB-Wavenet-C","en-GB-Wavenet-D","en-GB-Wavenet-F","en-GB-Standard-A","en-GB-Standard-B","en-GB-Standard-C","en-GB-Standard-D","en-GB-Standard-F","en-US-Wavenet-A","en-US-Wavenet-B","en-US-Wavenet-C","en-US-Wavenet-D","en-US-Wavenet-E","en-US-Wavenet-F","en-US-Wavenet-G","en-US-Wavenet-H","en-US-Wavenet-I","en-US-Wavenet-J","en-US-Standard-B","en-US-Standard-C","en-US-Standard-D","en-US-Standard-E","en-US-Standard-G","en-US-Standard-H","en-US-Standard-I","en-US-Standard-J","fil-PH-Wavenet-A","fil-PH-Wavenet-B","fil-PH-Wavenet-C","fil-PH-Wavenet-D","fil-PH-Standard-A","fil-PH-Standard-B","fil-PH-Standard-C","fil-PH-Standard-D","fi-FI-Wavenet-A","fi-FI-Standard-A","fr-CA-Wavenet-A","fr-CA-Wavenet-B","fr-CA-Wavenet-C","fr-CA-Wavenet-D","fr-CA-Standard-A","fr-CA-Standard-B","fr-CA-Standard-C","fr-CA-Standard-D","fr-FR-Wavenet-A","fr-FR-Wavenet-B","fr-FR-Wavenet-C","fr-FR-Wavenet-D","fr-FR-Wavenet-E","fr-FR-Standard-A","fr-FR-Standard-B","fr-FR-Standard-C","fr-FR-Standard-D","fr-FR-Standard-E","de-DE-Wavenet-A","de-DE-Wavenet-B","de-DE-Wavenet-C","de-DE-Wavenet-D","de-DE-Wavenet-E","de-DE-Wavenet-F","de-DE-Standard-A","de-DE-Standard-B","de-DE-Standard-E","de-DE-Standard-F","el-GR-Wavenet-A","el-GR-Standard-A","gu-IN-Standard-A","gu-IN-Standard-B","hi-IN-Wavenet-A","hi-IN-Wavenet-B","hi-IN-Wavenet-C","hi-IN-Wavenet-D","hi-IN-Standard-A","hi-IN-Standard-B","hi-IN-Standard-C","hi-IN-Standard-D","hu-HU-Wavenet-A","hu-HU-Standard-A","id-ID-Wavenet-A","id-ID-Wavenet-B","id-ID-Wavenet-C","id-ID-Wavenet-D","id-ID-Standard-A","id-ID-Standard-B","id-ID-Standard-C","id-ID-Standard-D","it-IT-Wavenet-A","it-IT-Wavenet-B","it-IT-Wavenet-C","it-IT-Wavenet-D","it-IT-Standard-A","it-IT-Standard-B","it-IT-Standard-C","it-IT-Standard-D","ja-JP-Wavenet-A","ja-JP-Wavenet-B","ja-JP-Wavenet-C","ja-JP-Wavenet-D","ja-JP-Standard-A","ja-JP-Standard-B","ja-JP-Standard-C","ja-JP-Standard-D","kn-IN-Standard-A","kn-IN-Standard-B","ko-KR-Wavenet-A","ko-KR-Wavenet-B","ko-KR-Wavenet-C","ko-KR-Wavenet-D","ko-KR-Standard-A","ko-KR-Standard-B","ko-KR-Standard-C","ko-KR-Standard-D","ml-IN-Standard-A","ml-IN-Standard-B","cmn-CN-Wavenet-A","cmn-CN-Wavenet-B","cmn-CN-Wavenet-C","cmn-CN-Wavenet-D","cmn-TW-Wavenet-A","cmn-TW-Wavenet-B","cmn-TW-Wavenet-C","cmn-CN-Standard-A","cmn-CN-Standard-B","cmn-CN-Standard-C","cmn-CN-Standard-D","cmn-TW-Standard-A","cmn-TW-Standard-B","cmn-TW-Standard-C","nb-NO-Wavenet-A","nb-NO-Wavenet-B","nb-no-Wavenet-E","nb-NO-Wavenet-C","nb-NO-Wavenet-D","nb-NO-Standard-A","nb-NO-Standard-B","nb-NO-Standard-C","nb-NO-Standard-D","nb-no-Standard-E","pl-PL-Wavenet-A","pl-PL-Wavenet-B","pl-PL-Wavenet-C","pl-PL-Wavenet-D","pl-PL-Wavenet-E","pl-PL-Standard-A","pl-PL-Standard-B","pl-PL-Standard-C","pl-PL-Standard-D","pl-PL-Standard-E","pt-BR-Wavenet-A","pt-BR-Standard-A","pt-PT-Wavenet-A","pt-PT-Wavenet-B","pt-PT-Wavenet-C","pt-PT-Wavenet-D","pt-PT-Standard-A","pt-PT-Standard-B","pt-PT-Standard-C","pt-PT-Standard-D","ru-RU-Wavenet-A","ru-RU-Wavenet-B","ru-RU-Wavenet-C","ru-RU-Wavenet-D","ru-RU-Wavenet-E","ru-RU-Standard-A","ru-RU-Standard-B","ru-RU-Standard-C","ru-RU-Standard-D","ru-RU-Standard-E","sk-SK-Wavenet-A","sk-SK-Standard-A","es-ES-Wavenet-B","es-ES-Standard-A","es-ES-Standard-B","sv-SE-Wavenet-A","sv-SE-Standard-A","ta-IN-Standard-A","ta-IN-Standard-B","te-IN-Standard-A","te-IN-Standard-B","th-TH-Standard-A","tr-TR-Wavenet-A","tr-TR-Wavenet-B","tr-TR-Wavenet-C","tr-TR-Wavenet-D","tr-TR-Wavenet-E","tr-TR-Standard-A","tr-TR-Standard-B","tr-TR-Standard-C","tr-TR-Standard-D","tr-TR-Standard-E","uk-UA-Wavenet-A","uk-UA-Standard-A","vi-VN-Wavenet-A","vi-VN-Wavenet-B","vi-VN-Wavenet-C","vi-VN-Wavenet-D","vi-VN-Standard-A","vi-VN-Standard-B","vi-VN-Standard-C","vi-VN-Standard-D"]
-
         # change this parameter to language, and have a dict mapping between what they select and the code
         valid_codes = ["ar-XA", "bn-IN", "yue-HK", "cs-CZ", "da-DK", "nl-NL", "en-AU", "en-IN", "en-GB", "en-US", "fil-PH", "fi-FI", "fr-CA", "fr-FR", "de-DE", "el-GR", "gu-IN", "hi-IN", "hu-HU", "id-ID", "it-IT", "ja-JP", "kn-IN", "ko-KR", "ml-IN", "cmn-CN", "cmn-TW", "nb-NO", "pl-PL", "pt-BR", "pt-PT", "ru-RU", "sk-SK", "es-ES", "sv-SE", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "vi-VN"]
         valid_genders = ['MALE','FEMALE']
+
+        if not speaker: speaker = random.choice(valid_speakers)
+        if not code: code = random.choice(valid_codes)
+        if not gender: gender = random.choice(valid_genders)
 
         if speaker not in valid_speakers: raise ValueError(f'Invalid speaker. Got {speaker}, expected one of {valid_speakers}')
         if code not in valid_codes: raise ValueError(f'Invalid code. Got {code}, expected one of {valid_codes}')
         if gender not in valid_genders: raise ValueError(f'Invalid code. Got {gender}, expected one of {valid_genders}')
 
-        # if gender or code or speaker are not provided, choose randomly
-
         payload='{"text":"%s","name":"%s","gender":"%s","code":"%s"}'% (text,speaker,gender,code)
         url = URLs.txt2speech_url
         response = self.session.post(url, headers=self.headers,data=payload)
 
-        if not outfile: outfile = 'my_text_to_audio.mp3'
         try:
             decode_bytes = base64.b64decode(response.text)
             with open(outfile, "wb") as wav_file:
                 wav_file.write(decode_bytes)
-            return ("Successfully generated audio file!")
+            return (f"Successfully generated audio file {outfile}")
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_video(self, video_id):
-        "Download synthetic video generated in your deep word account"
+    def download_video(self, video_id: str) -> None:
+        """Download one of your synthetically generated videos. The video should have
+           finished processing to be downloadable.
+
+        Args:
+            video_id (str): id of the video. You can find this from ``list_generated_videos``.
+        """
         url = URLs.download_vid_url + video_id
         response = self.session.get(url, headers=self.headers)
+        if not response.json()['status']:
+            raise ValueError("Unable to download video because it is still processing!")
         try:
             r = requests.get(response.json()['video_url'], stream=True)
             with open(response.json()['video_name'], 'wb') as f:
@@ -119,8 +126,8 @@ class DeepWord:
             raise ValueError(response.text)
 
     def download_all_videos(self, folder: Union[str, Path]  = 'downloaded_videos') -> None:
-        """Download all vidoes generated with your DeepWord account. You can optionally pass
-        a folder or nested folders where you want the vidoes to be saved.
+        """Download all videos generated with your DeepWord account. You can optionally pass
+        a folder or nested folders where you want the videos to be saved.
 
         Args:
             folder (Union[str, Path], optional): Path where you want all your downloaded
@@ -148,34 +155,93 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_youtube_video(self, url, types, start_time = None, end_time = None):
-        "Download a youtube video from it's url"
-        if (not start_time and end_time) or (not end_time and start_time):
-            raise ValueError('Provide both start and end times')
+    @staticmethod
+    def _convert_time(x): return time.strftime("%H:%M:%S", time.gmtime(x))
+
+    # todo providing start time and end time changes the title, it shouldn't change it
+    def download_youtube_video(self, url: str, types: str = 'video', start_time: int = None, end_time: int = None):
+        """Download a video from YouTube. You can also donwload an audio and provide start and
+           end times to download a trimmed version.
+
+        Args:
+            url (str): url of the video you want to download.
+            types (str, optional): [description]. Defaults to 'video'.
+            start_time (int, optional): Start time in seconds. Defaults to None.
+            end_time (int, optional): End time in seconds. Defaults to None.
+
+        Raises:
+            ValueError: If start time is provided but end time is not or the other way round.
+            ValueError: If start time is greater than end time.
+            ValueError: If end time is greater than the length of the YouTube video.
+
+        Returns:
+            fname (str): filename of the downloaded video
+        """
         if not start_time and not end_time:
             pytube.YouTube(url).streams.get_highest_resolution().download()
             return ("downloaded youtube video successfully!")
+
+        if start_time > end_time:
+            raise ValueError('Start time cannot be greater than end time')
+
+        if (start_time is None and end_time) or (end_time is None and start_time is not None):
+            raise ValueError('Both start and end times should be provided')
+
+        start_time = self._convert_time(int(start_time))
+        end_time = self._convert_time(int(end_time))
+
         payload = '{"end_time": "%s","start_time": "%s","type": "%s","url": "%s"}' % (end_time,start_time,types,url)
         url = URLs.download_yt_vid_url
         response = self.session.post(url, headers=self.headers, data=payload)
         try:
             r = self.session.get(response.json()['video_url'], stream=True,verify=False)
-            with open(response.json()['video_url'].split("/")[-1], 'wb') as f:
+            fname = response.json()['video_url'].split("/")[-1]
+            with open(fname, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=1024):
                     if chunk: # filter out keep-alive new chunks
                         f.write(chunk)
-            return ("downloaded youtube video successfully!")
+            print(f"Successfully downloaded the YouTube video {fname}")
+            return fname
         except Exception as e:
             raise ValueError(response.text)
 
-    def generate_video(self, video_file, audio_file):
+    def download_video_actor(self):
+        url = URLs.api_get_sample_file
+        response = self.session.post(url, headers=self.headers)
+        try:
+            return self._process_output(response.text)['sample_video_files']
+        except Exception as e:
+            raise ValueError(response.text)
+
+    @staticmethod
+    def _exists(x): return Path(x).exists()
+
+    def generate_video(self, video: str, audio: str, title: str = None):
+        """Generate a synthetic video using a video of a person talking and the audio
+           you want them to say. You can check the status of the video using
+           ``list_generated_videos`` and download it using ``download_video`` or
+           ``download_all_videos``
+
+        Args:
+            video (str): Video of the person you want talking.
+            audio (str): Audio you want the person to say.
+            title (str, optional): Optionally provide a title for the output. Defaults to
+                                   name of the video file.
+
+        Raises:
+            ValueError: If video or audio don't exist
         """
-        generate to the video
-        """
+
+        # check if the video and audio exist otherwise return an error
+        if not self._exists(video): raise ValueError(f'File not found {video}')
+        if not self._exists(audio): raise ValueError(f'File not found {audio}')
+
+        payload = {}
+        if title: payload = {'name': title}
         self.headers.pop("Content-Type")
         url = URLs.generate_vid_url
-        files = {'video_file': open(video_file,'rb'),'audio_file': open(audio_file,'rb')}
-        response = self.session.post(url, headers=self.headers,files=files)
+        files = {'video_file': open(video,'rb'), 'audio_file': open(audio,'rb')}
+        response = self.session.post(url, headers=self.headers,files=files,data=payload)
         try:
             return response.json()
         except Exception as e:
