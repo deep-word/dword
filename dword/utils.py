@@ -21,6 +21,9 @@ class URLs:
     validate_token_url = f'{base}/check_apikey'
     api_get_sample_file = f'{base}/api_get_sample_file'
 
+# Internal Cell
+def _file_exists(x): return Path(x).exists()
+
 # Cell
 def trim_video(video, start, end, outfile = None):
     """

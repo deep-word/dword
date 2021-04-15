@@ -11,9 +11,9 @@ import os,cv2
 from typing import List, Dict, Union
 from pathlib import Path
 import pytube
+from nbdev import show_doc
 
 from .utils import URLs
-from .config import API_KEY, SECRET_KEY
 
 urllib3.disable_warnings()
 

@@ -64,26 +64,176 @@ nb_path: "01_core.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">DeepWord</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>login successful
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.available_credits" class="doc_header"><code>DeepWord.available_credits</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>Get the number of credits available in your DeepWord account.</p>
+<p>Returns:
+    int: number of credits available in your DeepWord account.</p>
+
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.list_generated_videos" class="doc_header"><code>DeepWord.list_generated_videos</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.list_generated_videos</code>()</p>
+</blockquote>
+<p>Get a list of all the videos you've generated using your DeepWord account.</p>
+<p>Returns:
+    List[Dict]: a list of dictionaries, one for each video, includes a bunch of metadata.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.download_video" class="doc_header"><code>DeepWord.download_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.download_video</code>(<strong><code>video_id</code></strong>:<code>str</code>)</p>
+</blockquote>
+<p>Download one of your synthetically generated videos. The video should have
+   finished processing to be downloadable.</p>
+<p>Args:
+    video_id (str): id of the video. You can find this from <code>list_generated_videos</code>.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.download_all_videos" class="doc_header"><code>DeepWord.download_all_videos</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L128" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.download_all_videos</code>(<strong><code>folder</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'downloaded_videos'</code></em>)</p>
+</blockquote>
+<p>Download all videos generated with your DeepWord account. You can optionally pass
+a folder or nested folders where you want the videos to be saved.</p>
+<p>Args:
+    folder (Union[str, Path], optional): Path where you want all your downloaded
+                                        videos to be saved. Defaults to 'downloaded_videos'.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.download_youtube_video" class="doc_header"><code>DeepWord.download_youtube_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L162" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.download_youtube_video</code>(<strong><code>url</code></strong>:<code>str</code>, <strong><code>types</code></strong>:<code>str</code>=<em><code>'video'</code></em>, <strong><code>start_time</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>end_time</code></strong>:<code>int</code>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Download a video from YouTube. You can also donwload an audio and provide start and
+   end times to download a trimmed version.</p>
+<p>Args:
+    url (str): url of the video you want to download.
+    types (str, optional): [description]. Defaults to 'video'.
+    start_time (int, optional): Start time in seconds. Defaults to None.
+    end_time (int, optional): End time in seconds. Defaults to None.</p>
+<p>Raises:
+    ValueError: If start time is provided but end time is not or the other way round.
+    ValueError: If start time is greater than end time.
+    ValueError: If end time is greater than the length of the YouTube video.</p>
+<p>Returns:
+    fname (str): filename of the downloaded video</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DeepWord.generate_video" class="doc_header"><code>DeepWord.generate_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.generate_video</code>(<strong><code>video</code></strong>:<code>str</code>, <strong><code>audio</code></strong>:<code>str</code>, <strong><code>title</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Generate a synthetic video using a video of a person talking and the audio
+   you want them to say. You can check the status of the video using
+   <code>list_generated_videos</code> and download it using <code>download_video</code> or
+   <code>download_all_videos</code></p>
+<p>Args:
+    video (str): Video of the person you want talking.
+    audio (str): Audio you want the person to say.
+    title (str, optional): Optionally provide a title for the output. Defaults to
+                           name of the video file.</p>
+<p>Raises:
+    ValueError: If video or audio don't exist</p>
+
+</div>
+
 </div>
 
 </div>
