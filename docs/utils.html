@@ -6,8 +6,8 @@ title: Utility functions
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "API details."
-description: "API details."
+summary: "This module includes video and audio utilities to go along with the core module to make synthetic video generation a smooth experience."
+description: "This module includes video and audio utilities to go along with the core module to make synthetic video generation a smooth experience."
 nb_path: "00_utils.ipynb"
 ---
 <!--
@@ -31,33 +31,39 @@ nb_path: "00_utils.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Time-utils">Time utils<a class="anchor-link" href="#Time-utils"> </a></h2>
+<h2 id="Time-utils">Time utils<a class="anchor-link" href="#Time-utils"> </a></h2><p>A collection of functions for time related operations.</p>
+
 </div>
 </div>
 </div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">to_hhmmss</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> 
-    <span class="sd">&quot;&quot;&quot;Convert time from secs (int) to hh:mm:ss (str).</span>
+<div class="output_wrapper">
+<div class="output">
 
-<span class="sd">    Args:</span>
-<span class="sd">        x (int): Time in seconds.</span>
+<div class="output_area">
 
-<span class="sd">    Returns:</span>
-<span class="sd">        str: Time in hh:mm:ss format.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="to_hhmmss" class="doc_header"><code>to_hhmmss</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_hhmmss</code>(<strong><code>x</code></strong>:<code>int</code>)</p>
+</blockquote>
+<p>Convert time from secs (int) to hh:mm:ss (str).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
     
-    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -148,26 +154,31 @@ nb_path: "00_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">to_secs</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Convert time from hh:mm:ss (str) format to seconds (int).</span>
+<div class="output_wrapper">
+<div class="output">
 
-<span class="sd">    Args:</span>
-<span class="sd">        x (str): Time in hh:mm:ss format.</span>
+<div class="output_area">
 
-<span class="sd">    Returns:</span>
-<span class="sd">        int: Time in seconds.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
 
-    </div>
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="to_secs" class="doc_header"><code>to_secs</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_secs</code>(<strong><code>x</code></strong>:<code>str</code>)</p>
+</blockquote>
+<p>Convert time from hh:mm:ss (str) format to seconds (int).</p>
+
+</div>
+
+</div>
+
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -224,13 +235,7 @@ nb_path: "00_utils.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Video-utils">Video utils<a class="anchor-link" href="#Video-utils"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Use this function to crop a video</p>
+<h2 id="Video-utils">Video utils<a class="anchor-link" href="#Video-utils"> </a></h2><p>A collection of functions for video related operations</p>
 
 </div>
 </div>
@@ -246,7 +251,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trim_video" class="doc_header"><code>trim_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_video</code>(<strong><code>video</code></strong>, <strong><code>start</code></strong>, <strong><code>end</code></strong>, <strong><code>outfile</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="trim_video" class="doc_header"><code>trim_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_video</code>(<strong><code>video</code></strong>, <strong><code>start</code></strong>, <strong><code>end</code></strong>, <strong><code>outfile</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Crop a video in place from start to end. If you don't want to crop inplace, provide output filename.
 For youtube videos you can <code>download_youtube_video</code> before cropping it</p>
@@ -279,7 +284,7 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Check the resolution of a video. Output is in the form of height, width</p>
 <p>Args:
@@ -365,7 +370,7 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_fps" class="doc_header"><code>get_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Get the fps of a video</p>
 <p>Args:
@@ -397,7 +402,7 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_fps</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">check_fps</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -430,7 +435,7 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">get_fps</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mf">29.97</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">check_fps</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mf">29.97</span>
 </pre></div>
 
     </div>
@@ -442,7 +447,8 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Audio-utils">Audio utils<a class="anchor-link" href="#Audio-utils"> </a></h2>
+<h2 id="Audio-utils">Audio utils<a class="anchor-link" href="#Audio-utils"> </a></h2><p>A collection of functions for audio related operations</p>
+
 </div>
 </div>
 </div>
@@ -457,15 +463,10 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Change the format of audio file. Example, converting mp3 to wav. Works with
-   all formats supported by ffmpeg.</p>
-<p>Example: change_format('sample_audio.mp3', 'new_audio.wav')</p>
-<p>Args:
-    audio (Union[str, Path]): Path to the audio file you want to change the format of.
-                              Example: sample_audio.mp3
-    outfile (Union[str, Path]): Filename of the new file and it's format. Example: new_audio.wav</p>
+all formats supported by ffmpeg.</p>
 
 </div>
 
@@ -508,30 +509,56 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">trim_audio</span><span class="p">(</span><span class="n">audio</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">start_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;trimmed_audio.mp3&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Trim an audio file. Works with all formats supported by ffmpeg.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">change_audio_format</span><span class="p">(</span><span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="s1">&#39;another_audio.flac&#39;</span><span class="p">)</span>
+</pre></div>
 
-<span class="sd">    Examples: </span>
-<span class="sd">        trim_audio(&#39;sample_audio.mp3&#39;, 10, 20)</span>
-<span class="sd">        trim_audio(&#39;sample_audio.mp3&#39;, 10, 20, &#39;my_audio.mp3&#39;)</span>
-<span class="sd">        trim_audio(&#39;sample_audio.mp3&#39;, 10, 20, &#39;wav_output.wav&#39;)</span>
+    </div>
+</div>
+</div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        audio (Union[str, Path]): Path of the audio file you want to trim.</span>
-<span class="sd">        start_time (int): Start time in seconds.</span>
-<span class="sd">        end_time (int): End time in seconds.</span>
-<span class="sd">        outfile (Union[str, Path], optional): Name of the output file. This can also be </span>
-<span class="sd">                                              in a different format than the input file.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">audio</span><span class="p">,</span> <span class="n">outfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">audio</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
-    <span class="n">ext</span><span class="p">,</span> <span class="n">o_ext</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">outfile</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">AudioSegment</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
+</div>
+    {% endraw %}
 
-    <span class="n">start_time</span> <span class="o">=</span> <span class="n">start_time</span> <span class="o">*</span> <span class="mi">1000</span>
-    <span class="n">end_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">*</span> <span class="mi">1000</span>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
-    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">start_time</span><span class="p">:</span><span class="n">end_time</span><span class="p">]</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="n">o_ext</span><span class="p">)</span>
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
+</blockquote>
+<p>Trim an audio file. Works with all formats supported by ffmpeg.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_audio</span><span class="p">(</span><span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -548,7 +575,31 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_audio</span><span class="p">(</span><span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_audio</span><span class="p">(</span><span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;small_audio.mp3&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Note</strong>: The output can be in a different format</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_audio</span><span class="p">(</span><span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;small_audio.wav&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
