@@ -13,7 +13,7 @@ from pathlib import Path
 import pytube
 from nbdev.showdoc import *
 
-from .utils import URLs
+from .utils import *
 
 urllib3.disable_warnings()
 
