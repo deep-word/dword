@@ -44,16 +44,16 @@ def to_secs(x: str) -> int:
 def _exists(x): return Path(x).exists()
 
 # Cell
-def trim_video(video, start, end, outfile = None):
+def trim_video(video: Union[str, Path], start_time: int, end_time: int, outfile: Union[str, Path] = 'trimmed_video.mp4') -> None:
     """
-    Crop a video in place from start to end. If you don't want to crop inplace, provide output filename.
-    For youtube videos you can `download_youtube_video` before cropping it
+    Crop a video in place from start (secs) to end (secs). If you don't want to crop inplace, provide output filename.
+    For youtube videos you can use ``download_youtube_video`` before cropping it
     """
     raise NotImplementedError
 
 # Cell
 def check_resolution(video: Union[str, Path]) -> Dict:
-    """Check the resolution of a video. Output is in the form of height, width
+    """Check the resolution of a video.
     """
     try:
         vid = cv2.VideoCapture(video)
@@ -82,7 +82,7 @@ def change_audio_format(audio: Union[str, Path], outfile: Union[str, Path]) -> N
 
 # Cell
 def trim_audio(audio: Union[str, Path], start_time: int, end_time: int, outfile: Union[str, Path] = 'trimmed_audio.mp3') -> None:
-    """Trim an audio file. Works with all formats supported by ffmpeg.
+    """Trim an audio file. Start and end times are in seconds. Works with all formats supported by ffmpeg.
     """
     audio, outfile = Path(audio), Path(outfile)
     ext, o_ext = audio.suffix[1:], outfile.suffix[1:]

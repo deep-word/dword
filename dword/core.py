@@ -14,6 +14,7 @@ import pytube
 from nbdev.showdoc import *
 
 from .utils import *
+from .utils import URLs
 
 urllib3.disable_warnings()
 
