@@ -1,7 +1,7 @@
 {
   "dword": {
     "Overview": "/",
-    "Utils": "utils.html",
-    "Core": "core.html"
+    "Core": "core.html",
+    "Utils": "utils.html"
   }
 }

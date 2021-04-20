@@ -2,18 +2,18 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"URLs": "00_utils.ipynb",
-         "to_hhmmss": "00_utils.ipynb",
-         "to_secs": "00_utils.ipynb",
-         "trim_video": "00_utils.ipynb",
-         "check_resolution": "00_utils.ipynb",
-         "check_fps": "00_utils.ipynb",
-         "change_audio_format": "00_utils.ipynb",
-         "trim_audio": "00_utils.ipynb",
-         "DeepWord": "01_core.ipynb"}
+index = {"DeepWord": "00_core.ipynb",
+         "URLs": "01_utils.ipynb",
+         "to_hhmmss": "01_utils.ipynb",
+         "to_secs": "01_utils.ipynb",
+         "trim_video": "01_utils.ipynb",
+         "check_resolution": "01_utils.ipynb",
+         "check_fps": "01_utils.ipynb",
+         "change_audio_format": "01_utils.ipynb",
+         "trim_audio": "01_utils.ipynb"}
 
-modules = ["utils.py",
-           "core.py"]
+modules = ["core.py",
+           "utils.py"]
 
 doc_url = "https://deepword18.github.io/dword/"
 

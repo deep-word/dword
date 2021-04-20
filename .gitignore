@@ -1,3 +1,6 @@
+my_videos
+video_actors
+audio_samples
 *.bak
 dword/config.py
 .gitattributes
