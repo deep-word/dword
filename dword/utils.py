@@ -54,12 +54,6 @@ def trim_video(video, start, end, outfile = None):
 # Cell
 def check_resolution(video: Union[str, Path]) -> Dict:
     """Check the resolution of a video. Output is in the form of height, width
-
-    Args:
-        video (Union[str, Path]): Path to video file.
-
-    Returns:
-        Dict: height and width of the video
     """
     try:
         vid = cv2.VideoCapture(video)
@@ -71,12 +65,6 @@ def check_resolution(video: Union[str, Path]) -> Dict:
 # Cell
 def check_fps(video: Union[str, Path]) -> float:
     """Get the fps of a video
-
-    Args:
-        video (Union[str, Path]): Path of the video
-
-    Returns:
-        float: fps of the video
     """
     reader = imageio.get_reader(video)
     fps = reader.get_meta_data()['fps']

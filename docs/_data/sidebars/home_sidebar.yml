@@ -10,10 +10,10 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Utility functions
+      title: Utils
       url: utils.html
     - output: web,pdf
-      title: core functions
+      title: Core
       url: core.html
     output: web
     title: dword

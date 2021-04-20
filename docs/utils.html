@@ -1,6 +1,6 @@
 ---
 
-title: Utility functions
+title: Utils
 
 
 keywords: fastai
@@ -287,10 +287,6 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 <h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Check the resolution of a video. Output is in the form of height, width</p>
-<p>Args:
-    video (Union[str, Path]): Path to video file.</p>
-<p>Returns:
-    Dict: height and width of the video</p>
 
 </div>
 
@@ -370,13 +366,9 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L66" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Get the fps of a video</p>
-<p>Args:
-    video (Union[str, Path]): Path of the video</p>
-<p>Returns:
-    float: fps of the video</p>
 
 </div>
 
@@ -463,7 +455,7 @@ For youtube videos you can <code>download_youtube_video</code> before cropping i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Change the format of audio file. Example, converting mp3 to wav. Works with
 all formats supported by ffmpeg.</p>
@@ -530,7 +522,7 @@ all formats supported by ffmpeg.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
+<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
 </blockquote>
 <p>Trim an audio file. Works with all formats supported by ffmpeg.</p>
 

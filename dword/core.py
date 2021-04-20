@@ -11,7 +11,7 @@ import os,cv2
 from typing import List, Dict, Union
 from pathlib import Path
 import pytube
-from nbdev import show_doc
+from nbdev.showdoc import *
 
 from .utils import URLs
 
@@ -24,10 +24,6 @@ class DeepWord:
     """
     def __init__(self, api_key: str, secret_key: str) -> None:
         """Initialize a new DeepWord object. Login to your DeepWord account to generate api keys.
-
-        Args:
-            api_key (str, optional): API key of user account. Defaults to ''.
-            secret_key (str, optional): Secret key of the user account. Defaults to ''.
         """
         self.session = requests.session()
         self.session.verify = False
@@ -49,9 +45,6 @@ class DeepWord:
     @property
     def available_credits(self) -> int:
         """Get the number of credits available in your DeepWord account.
-
-        Returns:
-            int: number of credits available in your DeepWord account.
         """
         url = URLs.credits_url
         response = self.session.post(url, headers=self.headers)
@@ -61,11 +54,8 @@ class DeepWord:
         except:
             raise ValueError(response.text)
 
-    def list_generated_videos(self) -> List[Dict]:
+    def list_videos(self) -> List[Dict]:
         """Get a list of all the videos you've generated using your DeepWord account.
-
-        Returns:
-            List[Dict]: a list of dictionaries, one for each video, includes a bunch of metadata.
         """
         url = URLs.list_vids_url
         response = self.session.post(url, headers=self.headers)
@@ -105,16 +95,15 @@ class DeepWord:
             raise ValueError(response.text)
 
     def download_video(self, video_id: str) -> None:
-        """Download one of your synthetically generated videos. The video should have
-           finished processing to be downloadable.
-
-        Args:
-            video_id (str): id of the video. You can find this from ``list_generated_videos``.
+        """Download one of the synthetically generated videos on your DeepWord account.
+           The video id can be found using the ``list_generated_videos()`` function. The video
+           should have finished processing to be downloadable.
+           Optionally, you can use download_all_videos().
         """
         url = URLs.download_vid_url + video_id
         response = self.session.get(url, headers=self.headers)
-        if not response.json()['status']:
-            raise ValueError("Unable to download video because it is still processing!")
+        if response.json()['status'] is False:
+            raise ValueError("Video is still processing. Unable to download it at this time.")
         try:
             r = requests.get(response.json()['video_url'], stream=True)
             with open(response.json()['video_name'], 'wb') as f:
@@ -126,12 +115,8 @@ class DeepWord:
             raise ValueError(response.text)
 
     def download_all_videos(self, folder: Union[str, Path]  = 'downloaded_videos') -> None:
-        """Download all videos generated with your DeepWord account. You can optionally pass
-        a folder or nested folders where you want the videos to be saved.
-
-        Args:
-            folder (Union[str, Path], optional): Path where you want all your downloaded
-                                                videos to be saved. Defaults to 'downloaded_videos'.
+        """Download all vidoes generated with your DeepWord account. You can also pass
+        a folder or nested folders where you want the vidoes to be saved.
         """
         url = URLs.list_vids_url
         path = Path().cwd()
@@ -155,29 +140,13 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    @staticmethod
-    def _convert_time(x): return time.strftime("%H:%M:%S", time.gmtime(x))
-
-    # todo providing start time and end time changes the title, it shouldn't change it
     def download_youtube_video(self, url: str, types: str = 'video', start_time: int = None, end_time: int = None):
         """Download a video from YouTube. You can also donwload an audio and provide start and
            end times to download a trimmed version.
-
-        Args:
-            url (str): url of the video you want to download.
-            types (str, optional): [description]. Defaults to 'video'.
-            start_time (int, optional): Start time in seconds. Defaults to None.
-            end_time (int, optional): End time in seconds. Defaults to None.
-
-        Raises:
-            ValueError: If start time is provided but end time is not or the other way round.
-            ValueError: If start time is greater than end time.
-            ValueError: If end time is greater than the length of the YouTube video.
-
-        Returns:
-            fname (str): filename of the downloaded video
         """
         if not start_time and not end_time:
+            # there should be an if else inside this
+            # if types == 'audio' then it should download the full mp3 else mp4
             pytube.YouTube(url).streams.get_highest_resolution().download()
             return ("downloaded youtube video successfully!")
 
@@ -187,9 +156,8 @@ class DeepWord:
         if (start_time is None and end_time) or (end_time is None and start_time is not None):
             raise ValueError('Both start and end times should be provided')
 
-        start_time = self._convert_time(int(start_time))
-        end_time = self._convert_time(int(end_time))
-
+        start_time = to_hhmmss(int(start_time))
+        end_time = to_hhmmss(int(end_time))
         payload = '{"end_time": "%s","start_time": "%s","type": "%s","url": "%s"}' % (end_time,start_time,types,url)
         url = URLs.download_yt_vid_url
         response = self.session.post(url, headers=self.headers, data=payload)
@@ -205,42 +173,59 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_video_actor(self):
-        url = URLs.api_get_sample_file
+    def download_audio_samples(self):
+        """Download all the audio samples available on the DeepWord website
+        """
+        folder = Path().cwd() / 'audio_samples'
+        folder.mkdir(exist_ok = True)
+
+        url = URLs.api_get_audio_sample
         response = self.session.post(url, headers=self.headers)
         try:
-            return self._process_output(response.text)['sample_video_files']
+            for dic in self._process_output(response.text)['sample_audio_files']:
+                doc = self.session.get(dic['audio_url'])
+                fname = folder / (dic['title']+dic['extension'])
+                f = open(fname,"wb")
+                f.write(doc.content)
+                f.close()
+            return ("Downloaded all audio samples")
         except Exception as e:
             raise ValueError(response.text)
 
-    @staticmethod
-    def _exists(x): return Path(x).exists()
+    def download_video_actors(self):
+        """Download all the video actors available on the DeepWord website.
+        """
+        folder = Path().cwd() / 'video_actors'
+        folder.mkdir(exist_ok = True)
+
+        url = URLs.api_get_video_actors
+        response = self.session.post(url, headers=self.headers)
+        try:
+            for dic in self._process_output(response.text)['sample_video_files']:
+                with self.session.get(dic['video_url'], stream=True) as r:
+                    r.raise_for_status()
+                    fname = folder / (dic['title']+dic['extension'])
+                    with open(fname, 'wb') as f:
+                        for chunk in r.iter_content(chunk_size=8192):
+                            f.write(chunk)
+            return ("Downloaded all video actors")
+        except Exception as e:
+            raise ValueError(response.text)
 
     def generate_video(self, video: str, audio: str, title: str = None):
         """Generate a synthetic video using a video of a person talking and the audio
            you want them to say. You can check the status of the video using
            ``list_generated_videos`` and download it using ``download_video`` or
            ``download_all_videos``
-
-        Args:
-            video (str): Video of the person you want talking.
-            audio (str): Audio you want the person to say.
-            title (str, optional): Optionally provide a title for the output. Defaults to
-                                   name of the video file.
-
-        Raises:
-            ValueError: If video or audio don't exist
         """
-
-        # check if the video and audio exist otherwise return an error
-        if not self._exists(video): raise ValueError(f'File not found {video}')
-        if not self._exists(audio): raise ValueError(f'File not found {audio}')
-
+        if not _exists(video): raise ValueError(f'File not found {video}')
+        if not _exists(audio): raise ValueError(f'File not found {audio}')
         payload = {}
-        if title: payload = {'name': title}
-        self.headers.pop("Content-Type")
+        if title is not None:
+            payload={'name': title}
+        self.headers.pop("Content-Type", None)
         url = URLs.generate_vid_url
-        files = {'video_file': open(video,'rb'), 'audio_file': open(audio,'rb')}
+        files = {'video_file': open(video,'rb'),'audio_file': open(audio,'rb')}
         response = self.session.post(url, headers=self.headers,files=files,data=payload)
         try:
             return response.json()
