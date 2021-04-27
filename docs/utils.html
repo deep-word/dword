@@ -39,24 +39,6 @@ nb_path: "01_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_fail</span><span class="p">():</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
-<span class="n">test_fail</span><span class="p">(</span><span class="n">_fail</span><span class="p">,</span> <span class="n">contains</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -152,6 +134,13 @@ nb_path: "01_utils.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='<code>test_eq</code> tests if the two things are equal while <code>test_fail</code> makes sure it&#8217;s expected to fail for those arguments' %}</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -297,6 +286,40 @@ nb_path: "01_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<video src="Anna.mp4" controls  width="400"  height="400">
+      Your browser does not support the <code>video</code> element.
+    </video>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -307,8 +330,8 @@ nb_path: "01_utils.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="trim_video" class="doc_header"><code>trim_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_video</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_video.mp4'</code></em>)</p>
 </blockquote>
-<p>Crop a video in place from start (secs) to end (secs). If you don't want to crop inplace, provide output filename.
-For youtube videos you can use <code>download_youtube_video</code> before cropping it</p>
+<p>Trim a video in place from start (secs) to end (secs). If you don't want to trim inplace, provide output filename.
+For youtube videos you can use <code>download_youtube_video</code> before trimming them.</p>
 
 </div>
 
@@ -323,6 +346,74 @@ For youtube videos you can use <code>download_youtube_video</code> before croppi
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;trimmed_anna.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Moviepy - Running:
+&gt;&gt;&gt; &#34;+ &#34; &#34;.join(cmd)
+Moviepy - Command successful
+Successfully trimmed video!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display_video</span><span class="p">(</span><span class="s1">&#39;trimmed_anna.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<video src="trimmed_anna.mp4" controls  width="400"  height="400">
+      Your browser does not support the <code>video</code> element.
+    </video>
+</div>
+
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -338,7 +429,7 @@ For youtube videos you can use <code>download_youtube_video</code> before croppi
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L60" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Check the resolution of a video.</p>
 
@@ -420,7 +511,7 @@ For youtube videos you can use <code>download_youtube_video</code> before croppi
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Get the fps of a video</p>
 
@@ -509,7 +600,7 @@ For youtube videos you can use <code>download_youtube_video</code> before croppi
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L80" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Change the format of audio file. Example, converting mp3 to wav. Works with
 all formats supported by ffmpeg.</p>
@@ -604,7 +695,7 @@ all formats supported by ffmpeg.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
+<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
 </blockquote>
 <p>Trim an audio file. Start and end times are in seconds. Works with all formats supported by ffmpeg.</p>
 
@@ -735,7 +826,7 @@ all formats supported by ffmpeg.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>{% include note.html content='The output can be in a different format' %}</p>
+<p>{% include note.html content='The output for <code>trim_audio</code> can be in a different format than the input' %}</p>
 
 </div>
 </div>

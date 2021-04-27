@@ -13,7 +13,7 @@ from typing import Dict, Union
 import cv2
 from fastcore.test import *
 import imageio
-from IPython.display import Audio
+from IPython.display import Audio, Video
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from nbdev.showdoc import *
 from pydub import AudioSegment
@@ -51,10 +51,11 @@ def _exists(x): return Path(x).exists()
 # Cell
 def trim_video(video: Union[str, Path], start_time: int, end_time: int, outfile: Union[str, Path] = 'trimmed_video.mp4') -> None:
     """
-    Crop a video in place from start (secs) to end (secs). If you don't want to crop inplace, provide output filename.
-    For youtube videos you can use ``download_youtube_video`` before cropping it
+    Trim a video in place from start (secs) to end (secs). If you don't want to trim inplace, provide output filename.
+    For youtube videos you can use ``download_youtube_video`` before trimming them.
     """
-    raise NotImplementedError
+    ffmpeg_extract_subclip(f"{video}", start_time, end_time, targetname=f"{outfile}")
+    print(f'Successfully trimmed video!')
 
 # Cell
 def check_resolution(video: Union[str, Path]) -> Dict:
