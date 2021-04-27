@@ -55,9 +55,7 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Install the dword library</li>
-</ol>
+<p>Install the dword library</p>
 
 </div>
 </div>
@@ -72,15 +70,6 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Make sure you have <a href="https://ffmpeg.org/download.html">ffmpeg installed.</a></li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Quick-start">Quick start<a class="anchor-link" href="#Quick-start"> </a></h2><h3 id="Step-1:-Use-api-keys-to-login">Step 1: Use api keys to login<a class="anchor-link" href="#Step-1:-Use-api-keys-to-login"> </a></h3><p>Start by <a href="https://login.deepword.co/user/signin">logging into your DeepWord account</a> and generating API keys</p>
 <p><img src="/dword/images/api_key.png" alt="test_image"></p>
 <p>Use these keys to login to your account in Python</p>
@@ -88,24 +77,58 @@ nb_path: "index.ipynb"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">DeepWord</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">)</span>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dword.core</span> <span class="kn">import</span> <span class="n">DeepWord</span>
 </pre></div>
 
+    </div>
 </div>
 </div>
+
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Step-2:-Start-creating-videos">Step 2: Start creating videos<a class="anchor-link" href="#Step-2:-Start-creating-videos"> </a></h3><p><strong>That's it!!!</strong> Now you can start creating videos. We have many options for choosing a video or an audio. Possible pipelines for each is shown below</p>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">DeepWord</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>login successful
+</pre>
+</div>
+</div>
 
 </div>
 </div>
+
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pipelines-for-videos">Pipelines for videos<a class="anchor-link" href="#Pipelines-for-videos"> </a></h2><p>The main function in <code>dword</code> is the <code>generate_video</code> function. It's what we will use to generate synthetic videos. All we need is a video of the person we want talking and the audio we want them to say.</p>
+<h3 id="Step-2:-Start-creating-videos">Step 2: Start creating videos<a class="anchor-link" href="#Step-2:-Start-creating-videos"> </a></h3><p>{% include tip.html content='That&#8217;s it!!!!' %}
+Now you can start creating synthetic videos. All you need is a video of the person talking and the audio you want them to say.</p>
 
 </div>
 </div>
@@ -113,28 +136,36 @@ nb_path: "index.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">generate_video</span><span class="p">(</span><span class="s1">&#39;Anna.mp4&#39;</span><span class="p">,</span> <span class="s1">&#39;my_audio.mp3&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;first_deepword_video.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Generating video. This will take a few minutes.
+</pre>
+</div>
+</div>
 
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DeepWord.generate_video" class="doc_header"><code>DeepWord.generate_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.generate_video</code>(<strong><code>video</code></strong>:<code>str</code>, <strong><code>audio</code></strong>:<code>str</code>, <strong><code>title</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
-</blockquote>
-<p>Generate a synthetic video using a video of a person talking and the audio
-   you want them to say. You can check the status of the video using
-   <code>list_generated_videos</code> and download it using <code>download_video</code> or
-   <code>download_all_videos</code></p>
-<p>Args:
-    video (str): Video of the person you want talking.
-    audio (str): Audio you want the person to say.
-    title (str, optional): Optionally provide a title for the output. Defaults to
-                           name of the video file.</p>
-<p>Raises:
-    ValueError: If video or audio don't exist</p>
+<div class="output_area">
 
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;status&#39;: True,
+ &#39;message&#39;: &#39;Your video has been added to the queue for processing. Please check back in 10-15 minutes&#39;,
+ &#39;url&#39;: &#39;https://staging.deepword.co/video/u5miip0ko0dcei2&#39;}</pre>
 </div>
 
 </div>
@@ -147,23 +178,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the video, we have 3 options</p>
-<h3 id="Option-1:-Local-video-file">Option 1: Local video file<a class="anchor-link" href="#Option-1:-Local-video-file"> </a></h3><p>You can have a file downloaded locally. In that case you just need to pass the path to the file to the <code>generate_video</code> function</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">generate_video</span><span class="p">(</span><span class="s1">&#39;videos/local_vid.mp4&#39;</span><span class="p">,</span> <span class="n">audio</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Option2:-YouTube-video">Option2: YouTube video<a class="anchor-link" href="#Option2:-YouTube-video"> </a></h3><p>You can use a YouTube video as the input to the generate video function. For this, you will have to first download the YouTube video and then use it as a local video like we did in the example above. For this, we will use the <code>download_youtube_video</code> function. You can also provide a start_time and an end_time to crop the video before downloading</p>
+<p>{% include important.html content='The video can take a few minutes to generate. You can find the status of the video by retrieving a list of all videos on your account' %}</p>
 
 </div>
 </div>
@@ -171,6 +186,16 @@ nb_path: "index.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">list_videos</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -178,23 +203,16 @@ nb_path: "index.ipynb"
 <div class="output_area">
 
 
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DeepWord.download_youtube_video" class="doc_header"><code>DeepWord.download_youtube_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L162" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.download_youtube_video</code>(<strong><code>url</code></strong>:<code>str</code>, <strong><code>types</code></strong>:<code>str</code>=<em><code>'video'</code></em>, <strong><code>start_time</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>end_time</code></strong>:<code>int</code>=<em><code>None</code></em>)</p>
-</blockquote>
-<p>Download a video from YouTube. You can also donwload an audio and provide start and
-   end times to download a trimmed version.</p>
-<p>Args:
-    url (str): url of the video you want to download.
-    types (str, optional): [description]. Defaults to 'video'.
-    start_time (int, optional): Start time in seconds. Defaults to None.
-    end_time (int, optional): End time in seconds. Defaults to None.</p>
-<p>Raises:
-    ValueError: If start time is provided but end time is not or the other way round.
-    ValueError: If start time is greater than end time.
-    ValueError: If end time is greater than the length of the YouTube video.</p>
-<p>Returns:
-    fname (str): filename of the downloaded video</p>
 
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;email&#39;: &#39;blablabla@yopmail.com&#39;,
+ &#39;thumbnail&#39;: &#39;video_u5miip0ko0dcei2.mp4&#39;,
+ &#39;title&#39;: &#39;first_deepword_video.mp4&#39;,
+ &#39;video_url&#39;: &#39;https://videos-deep-word123.s3.us-east-2.amazonaws.com/output_data/u5miip0ko0dcei2.mp4&#39;,
+ &#39;video_duration&#39;: &#39;30.0000&#39;,
+ &#39;video_id&#39;: &#39;u5miip0ko0dcei2&#39;,
+ &#39;generate_date&#39;: &#39;2021-04-27T18:34:32.000Z&#39;,
+ &#39;output_status&#39;: &#39;Queued&#39;}</pre>
 </div>
 
 </div>
@@ -205,6 +223,13 @@ nb_path: "index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once the status changes from 'Queued' to 'Completed' you can either use <code>acc.download_video</code> or <code>acc.download_youtube_video</code> to download your video.</p>
+
+</div>
+</div>
+</div>
 </div>
  
 

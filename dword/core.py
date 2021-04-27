@@ -19,7 +19,7 @@ from pytube import YouTube
 
 from .utils import *
 from .utils import URLs, _exists
-from nbdev import show_doc
+from nbdev.showdoc import show_doc
 
 urllib3.disable_warnings()
 

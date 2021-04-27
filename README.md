@@ -2,20 +2,18 @@
 > An amazing library to create synthetic videos
 
 
-```
+```python
 from nbdev import show_doc
 from dword.core import DeepWord
 ```
 
 ## Installation
 
-1. Install the dword library
+Install the dword library
 
 ```
 pip install dword
 ```
-
-2. Make sure you have [ffmpeg installed.](https://ffmpeg.org/download.html)
 
 ## Quick start
 
@@ -28,69 +26,54 @@ Start by [logging into your DeepWord account](https://login.deepword.co/user/sig
 Use these keys to login to your account in Python
 
 ```python
+from dword.core import DeepWord
+```
+
+```python
 acc = DeepWord(API_KEY, SECRET_KEY)
 ```
 
+    login successful
+
+
 ### Step 2: Start creating videos
-
-**That's it!!!** Now you can start creating videos. We have many options for choosing a video or an audio. Possible pipelines for each is shown below
-
-## Pipelines for videos
-
-The main function in ``dword`` is the ``generate_video`` function. It's what we will use to generate synthetic videos. All we need is a video of the person we want talking and the audio we want them to say.
-
-
-<h4 id="DeepWord.generate_video" class="doc_header"><code>DeepWord.generate_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L219" class="source_link" style="float:right">[source]</a></h4>
-
-> <code>DeepWord.generate_video</code>(**`video`**:`str`, **`audio`**:`str`, **`title`**:`str`=*`None`*)
-
-Generate a synthetic video using a video of a person talking and the audio
-   you want them to say. You can check the status of the video using
-   ``list_generated_videos`` and download it using ``download_video`` or
-   ``download_all_videos``
-
-Args:
-    video (str): Video of the person you want talking.
-    audio (str): Audio you want the person to say.
-    title (str, optional): Optionally provide a title for the output. Defaults to
-                           name of the video file.
-
-Raises:
-    ValueError: If video or audio don't exist
-
-
-For the video, we have 3 options
-### Option 1: Local video file
-
-You can have a file downloaded locally. In that case you just need to pass the path to the file to the ``generate_video`` function
+{% include tip.html content='That&#8217;s it!!!!' %}
+Now you can start creating synthetic videos. All you need is a video of the person talking and the audio you want them to say.
 
 ```python
-acc.generate_video('videos/local_vid.mp4', audio, outfile)
+acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4')
 ```
 
-### Option2: YouTube video
-
-You can use a YouTube video as the input to the generate video function. For this, you will have to first download the YouTube video and then use it as a local video like we did in the example above. For this, we will use the ``download_youtube_video`` function. You can also provide a start_time and an end_time to crop the video before downloading
+    Generating video. This will take a few minutes.
 
 
-<h4 id="DeepWord.download_youtube_video" class="doc_header"><code>DeepWord.download_youtube_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L162" class="source_link" style="float:right">[source]</a></h4>
 
-> <code>DeepWord.download_youtube_video</code>(**`url`**:`str`, **`types`**:`str`=*`'video'`*, **`start_time`**:`int`=*`None`*, **`end_time`**:`int`=*`None`*)
 
-Download a video from YouTube. You can also donwload an audio and provide start and
-   end times to download a trimmed version.
 
-Args:
-    url (str): url of the video you want to download.
-    types (str, optional): [description]. Defaults to 'video'.
-    start_time (int, optional): Start time in seconds. Defaults to None.
-    end_time (int, optional): End time in seconds. Defaults to None.
+    {'status': True,
+     'message': 'Your video has been added to the queue for processing. Please check back in 10-15 minutes',
+     'url': 'https://staging.deepword.co/video/u5miip0ko0dcei2'}
 
-Raises:
-    ValueError: If start time is provided but end time is not or the other way round.
-    ValueError: If start time is greater than end time.
-    ValueError: If end time is greater than the length of the YouTube video.
 
-Returns:
-    fname (str): filename of the downloaded video
 
+{% include important.html content='The video can take a few minutes to generate. You can find the status of the video by retrieving a list of all videos on your account' %}
+
+```python
+acc.list_videos()[-1]
+```
+
+
+
+
+    {'email': 'blablabla@yopmail.com',
+     'thumbnail': 'video_u5miip0ko0dcei2.mp4',
+     'title': 'first_deepword_video.mp4',
+     'video_url': 'https://videos-deep-word123.s3.us-east-2.amazonaws.com/output_data/u5miip0ko0dcei2.mp4',
+     'video_duration': '30.0000',
+     'video_id': 'u5miip0ko0dcei2',
+     'generate_date': '2021-04-27T18:34:32.000Z',
+     'output_status': 'Queued'}
+
+
+
+Once the status changes from 'Queued' to 'Completed' you can either use `acc.download_video` or `acc.download_youtube_video` to download your video.
