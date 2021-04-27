@@ -16,11 +16,11 @@ entries:
       title: Utils
       url: utils.html
     - output: web,pdf
-      title: Tutorial for educational content
-      url: tutorials.educational.html
+      title: Tutorials.educational
+      url: Tutorials.educational.html
     - output: web,pdf
-      title: Tutorial for custom sales messages
-      url: tutorials.sales.html
+      title: Tutorials.sales
+      url: Tutorials.sales.html
     output: web
     title: dword
   output: web
