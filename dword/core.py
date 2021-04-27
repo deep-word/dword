@@ -3,18 +3,23 @@
 __all__ = ['DeepWord']
 
 # Internal Cell
-import requests
-import json
-import urllib3
 import base64
-import os,cv2
-from typing import List, Dict, Union
+import json
+import os
+import random
+import time
 from pathlib import Path
+from typing import Dict, List, Union
+
+import cv2
 import pytube
-from nbdev.showdoc import *
+import requests
+import urllib3
+from pytube import YouTube
 
 from .utils import *
 from .utils import URLs, _exists
+from nbdev import show_doc
 
 urllib3.disable_warnings()
 
@@ -141,38 +146,23 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_youtube_video(self, url: str, types: str = 'video', start_time: int = None, end_time: int = None):
-        """Download a video from YouTube. You can also donwload an audio and provide start and
-           end times to download a trimmed version.
+    def download_youtube_video(self, url: str, types: str = 'video', folder = 'youtube'):
+        """Download a video from YouTube. You can also donwload an audio by providing
+           types = 'audio'.
         """
-        if not start_time and not end_time:
-            # there should be an if else inside this
-            # if types == 'audio' then it should download the full mp3 else mp4
-            pytube.YouTube(url).streams.get_highest_resolution().download()
-            return ("downloaded youtube video successfully!")
-
-        if start_time > end_time:
-            raise ValueError('Start time cannot be greater than end time')
-
-        if (start_time is None and end_time) or (end_time is None and start_time is not None):
-            raise ValueError('Both start and end times should be provided')
-
-        start_time = to_hhmmss(int(start_time))
-        end_time = to_hhmmss(int(end_time))
-        payload = '{"end_time": "%s","start_time": "%s","type": "%s","url": "%s"}' % (end_time,start_time,types,url)
-        url = URLs.download_yt_vid_url
-        response = self.session.post(url, headers=self.headers, data=payload)
-        try:
-            r = self.session.get(response.json()['video_url'], stream=True,verify=False)
-            fname = response.json()['video_url'].split("/")[-1]
-            with open(fname, 'wb') as f:
-                for chunk in r.iter_content(chunk_size=1024):
-                    if chunk: # filter out keep-alive new chunks
-                        f.write(chunk)
-            print(f"Successfully downloaded the YouTube video {fname}")
-            return fname
-        except Exception as e:
-            raise ValueError(response.text)
+        folder = Path(folder)
+        folder.mkdir(exist_ok=True)
+        if types == "video":
+            pytube.YouTube(url).streams.get_highest_resolution().download(folder)
+            print("downloaded youtube video successfully!")
+        else:
+            yt = YouTube(url)
+            stream = yt.streams.filter(only_audio=True).first()
+            out_file  = stream.download(folder)
+            base, ext = os.path.splitext(out_file)
+            new_file = base + '_audio.mp3'
+            os.rename(out_file, new_file)
+            print("downloaded youtube audio successfully!")
 
     def download_audio_samples(self):
         """Download all the audio samples available on the DeepWord website
