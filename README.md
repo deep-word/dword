@@ -3,6 +3,8 @@
 
 
 ```python
+import os
+
 from nbdev import show_doc
 from dword.core import DeepWord
 ```
