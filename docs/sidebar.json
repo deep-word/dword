@@ -3,7 +3,7 @@
     "Overview": "/",
     "Core": "core.html",
     "Utils": "utils.html",
-    "Tutorials.educational": "Tutorials.educational.html",
-    "Tutorials.sales": "Tutorials.sales.html"
+    "tutorials.educational": "tutorials.educational.html",
+    "tutorials.sales": "tutorials.sales.html"
   }
 }
