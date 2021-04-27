@@ -2,10 +2,10 @@
   "dword": {
     "Overview": "/",
     "Core": "core.html",
-    "Utils": "utils.html",
+    "Utils": "utils.html"
   },
   "Tutorials": {
-    "Creating educational videos": "tutorials.educational.html",
-    "Customizing sales videos": "tutorials.sales.html"
+    "Creating educational videos": "/tutorials.educational",
+    "Customizing sales videos": "/tutorials.sales"
   }
 }

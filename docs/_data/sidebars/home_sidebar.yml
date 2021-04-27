@@ -15,13 +15,16 @@ entries:
     - output: web,pdf
       title: Utils
       url: utils.html
-    - output: web,pdf
-      title: tutorials.educational
-      url: tutorials.educational.html
-    - output: web,pdf
-      title: tutorials.sales
-      url: tutorials.sales.html
     output: web
     title: dword
+  - folderitems:
+    - output: web,pdf
+      title: Creating educational videos
+      url: /tutorials.educational
+    - output: web,pdf
+      title: Customizing sales videos
+      url: /tutorials.sales
+    output: web
+    title: Tutorials
   output: web
   title: Sidebar
