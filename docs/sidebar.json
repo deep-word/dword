@@ -3,7 +3,9 @@
     "Overview": "/",
     "Core": "core.html",
     "Utils": "utils.html",
-    "tutorials.educational": "tutorials.educational.html",
-    "tutorials.sales": "tutorials.sales.html"
+  },
+  "Tutorials": {
+    "Creating educational videos": "tutorials.educational.html",
+    "Customizing sales videos": "tutorials.sales.html"
   }
 }
