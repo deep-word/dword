@@ -3,15 +3,20 @@
 __all__ = ['to_hhmmss', 'to_secs', 'trim_video', 'check_resolution', 'check_fps', 'change_audio_format', 'trim_audio']
 
 # Internal Cell
+import os
+import subprocess
 import time
 from pathlib import Path
-import subprocess
 from subprocess import CalledProcessError
-import os, cv2
-from typing import Union, Dict
-from pydub import AudioSegment
+from typing import Dict, Union
+
+import cv2
+from fastcore.test import *
 import imageio
+from IPython.display import Audio
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from nbdev.showdoc import *
+from pydub import AudioSegment
 
 # Internal Cell
 class URLs:
@@ -30,7 +35,7 @@ class URLs:
 def to_hhmmss(x: int) -> str:
     """Convert time from secs (int) to hh:mm:ss (str).
     """
-
+    if not x >= 0: raise Exception(f'seconds cannot be negative, got {x}')
     return time.strftime("%H:%M:%S", time.gmtime(x))
 
 # Cell
