@@ -40,7 +40,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DeepWord" class="doc_header"><code>class</code> <code>DeepWord</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DeepWord</code>(<strong><code>api_key</code></strong>:<code>str</code>, <strong><code>secret_key</code></strong>:<code>str</code>)</p>
+<h2 id="DeepWord" class="doc_header"><code>class</code> <code>DeepWord</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L28" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DeepWord</code>(<strong><code>api_key</code></strong>:<code>str</code>, <strong><code>secret_key</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>A class for logging into your DeepWord account in Python and generating videos at scale</p>
 
@@ -143,7 +143,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>10002</pre>
+<pre>9968</pre>
 </div>
 
 </div>
@@ -165,7 +165,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DeepWord.list_videos" class="doc_header"><code>DeepWord.list_videos</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.list_videos</code>()</p>
+<h4 id="DeepWord.list_videos" class="doc_header"><code>DeepWord.list_videos</code><a href="https://github.com/deepword18/dword/tree/master/dword/core.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DeepWord.list_videos</code>()</p>
 </blockquote>
 <p>Get a list of all the videos you've generated using your DeepWord account.</p>
 
@@ -331,16 +331,17 @@ a folder or nested folders where you want the vidoes to be saved.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Anna.mp4                     Marcus.mp4
-Berto.mp4                    Mary.mp4
-Carlos.mp4                   Mia.mp4
-Dalton.mp4                   Micheal.mp4
-Emily.mp4                    Noelle.mp4
-Henry.mp4                    Richard.mp4
-Isaac.mp4                    Sam.mp4
-James.mp4                    Trey.mp4
-Julia.mp4                    Youtube_3lbd7ml4kni00cq7.mp4
+<pre>Anna.mp4                     Mary.mp4
+Berto.mp4                    Mia.mp4
+Carlos.mp4                   Micheal.mp4
+Dalton.mp4                   Noelle.mp4
+Emily.mp4                    Richard.mp4
+Henry.mp4                    Sam.mp4
+Isaac.mp4                    Trey.mp4
+James.mp4                    Youtube_3lbd7ml4kni00cq7.mp4
+Julia.mp4                    first_deepword_video.mp4
 Karen.mp4                    new_video.mp4
+Marcus.mp4
 </pre>
 </div>
 </div>
@@ -548,6 +549,191 @@ Kevin Hart.mp3             [Korean] Bong Joon Ho.mp3
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Using-text2speech">Using text2speech<a class="anchor-link" href="#Using-text2speech"> </a></h2><p>One of the big advantages of using DeepWord is you don't even have to record an audio. You can use our text2speech feature to convert your text into audio. We support a <strong>41 languages</strong> and a bunch of speakers for each language. To see the available languages you can do</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">account</span><span class="o">.</span><span class="n">_available_languages</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;arabic&#39;, &#39;bengali&#39;, &#39;chinese&#39;, &#39;czech&#39;, &#39;danish&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lang</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">_available_languages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lang</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;arabic&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speakers</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">_available_speakers</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
+<span class="n">speakers</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;ar-XA-Wavenet-A FEMALE&#39;,
+ &#39;ar-XA-Wavenet-B MALE&#39;,
+ &#39;ar-XA-Wavenet-C MALE&#39;,
+ &#39;ar-XA-Standard-A FEMALE&#39;,
+ &#39;ar-XA-Standard-B MALE&#39;,
+ &#39;ar-XA-Standard-C MALE&#39;,
+ &#39;ar-XA-Standard-D FEMALE&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;I want this speaker to speak this text&#39;</span>
+<span class="n">account</span><span class="o">.</span><span class="n">text2speech</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">lang</span><span class="p">,</span> <span class="n">speakers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;Successfully generated audio file text2speech.mp3&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Audio</span><span class="p">(</span><span class="s1">&#39;text2speech.mp3&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+                <audio  controls="controls" >
+                    <source src="data:audio/mpeg;base64,//NExAAAAANIAAAAADKFPtEAyMOEjk42GAwE6GXv+/8P26kohh/HLcty3/f+NxuX04AAAAhC/93DgYG+7n+7uIQMVAmD/BB39/KO/1g/////5QHwf5cH1TqiGhgFdXPh//NExFMSkOIIAVgYALjGC0ErdssUR5hp0PX/gCaTND5iXllhHEYmKBoitjgySmokzUydmWkZOoqDmBYDDsu6npMg04S81ZJBtNTa1bMaHzQ8rTrvqW9BlKWjMFoTQ8tq//NExFsesmo0AZpoAagv9brVo9BChNFUGd2Mrfz95dh+mFOBXs0+wnhTDwNdYYSebFQf8RUFtLisE49D6DjaBJIbPHMg/F2WAlj2JfbIzuLOX8/C6KhIt6rQjPLiSwYp//NExDMdwc6oAY94AHzC2JwCbOB5e/vfsLH3jnhvZ6Pm2173+v3z+0KBEucxlPXsbL7/53//SDH3TFc4ivo0rRAf/DBQ+6VCja7v+l6bnfUQ1v/u1AERvLVqtMJ7sHrz//NExA8VuUrAAdhgAVKois4u4/EWytPrATySdKrmhXjy647SEwvH11IViGMhGMj1UDQ8UN6w299/s0pmkXXST+1tE/W66kYQoqHvqrDOvQck93P/9tf/LYDbGZH3AwZo//NExAsUSU7IAHvMlDYUER8+TpfSGs9/mq5Z6a9oT6/xmuXtolHrEnmkI00wGPHIk03Ri4TZLZbLpHNxO1InFOUEDjA0uIygutAaQBk///////TV5+v1Nqqk4lTlP2yj//NExAwUsXq8AMtMlDFAQJAerYYwmRTbRWSJRN36KSKb11lhopbEiSajzDkuSJkMCDQOSRtN3c0yQss0jJFLFdrmrYpg6dGn0mVHxH////q3TIupx//1VegA5BzExlfq//NExAwUKYq0AMwSlE9MgEZE0a3mJV+pZxvebv1KL3d8a24VUo0IgKDfykrVMk7ClSpksYxAywsii3Pff/ylWgqaw6ct////rpe9CqZdSllAEkLcwCA0DqguisnRMgog//NExA4SEaq0AKNMlM7V9Tr+tvzF+2Zf5/++d/9k0kiVgep6L26SRkhjVSnpUH3jtndBq868p4dsMD+j///UlrFmmJplMaVqwwx1ncjIKKF1WyO1O85KAYB5Vtrf6lLb//NExBgRYVawAMtMlPZ/1Z9bM/zvvsxjN8JOeVC6cA2URh8LlxHHh9owRnUteLWW////adaK03b6HoqvTxqxnGDDlzgNxK4vimfwQQqEQISxen5DDf7r5YMGvaR36bJl//NExCUSkUKgANMMcOnHokRSaMlVVN/ryRn+cn+3lKZk4tHmFuEXAplnf/////t/8JqqjOFi7EFFzDQiAYlDAQ2SicenSpMGOH4hF73zTZQKm2IwGQiEIIqaUzH4NYp+//NExC0REJqQAOZSTEX1zy2bXTwxn6AyjT7/////7ww6oV3l6uT9NdmGiiN0cObDTuribaKr6OBprUZ5I6jxBSy1IpJKtzJ2Hsvvo6cX5P8vkHoUXrA4Ph57naP////+//NExDsQAH6cANZwSLP8uPYYw1/M6RyweaaHNynmEpEoSpjYj4qBGi1eOLGqRDyaXpql4D/ef/8f///+n5/oEz96ntynOllYXO+Ufu////2+ulKkH8P1V5kIqEEHlRVN//NExE4RGZqwANPKlFIlQHMK+ff8MfJyOt/ezdCUt8KebFop1s7/ervorzN+f/O/r/UO6qQ4dxOPDgeYABMGA8CbG3r//////Utb9IdINJmqRebGdAIoaD7HRyQ+lfKQ//NExFwRgU7AAIvElITEXdFeQ0QFGmkYoJG6xzSJurZT/mO32+xjgBFlCs4ghcRAoiOBh5YOrH//////bVP0KtZ5593EgxrfP/H7WOTcAgsVBSZw2WUCLmCuxQFiSvpE//NExGkSCWLAAJyElDSeOOpNjMig7pF7fqG66laVLRNjGWo2bYMbVClDChawOlrP/////9a6zgaxrb+IvnJiSdqSTYr0y6qdxLhurNIcWCkHJlpmPizNevzFy5OTDEtC//NExHMSIZ64AMSElGZSytk4mGfWv5Kq96Xn5d5Kql1c//25VuXrcgrqDIggvInh/FkPu/sadALi5vP6PnhaWSL1TwWDT6SJQEJ+jhUHEPXMODw4jPXfXo3c+0GORwPH//NExH0TgdKYANvGlVBf3ZrlupNWFGwbZ4iAywDGkHhL87zQs+fPsboIioEBMAOMzMX2BgYjdeZjitWsZSLUUo/9dY2vamlRCAGELJ0kWaYJsQchbyJqElgsmvw7OzN6//NExIIZGfaEANsGmM6zuVbkaoswBW5sW1ovMxJ2N6748ec31ziSJWsSSqZ/2nyZn9/8//rf/+/mZ+41eecFVaORsujbGukOjEXYVO///WowsFAtEOBxiZoaIFM5MiOW//NExHAX2eqAAVswAOAY9KdBDU1JSb7P1NSliY3HREjB2A+Si2OD4ekTkZKTCeWH4h2QfMeRGkVyAjLkRIcacRExpqHH56Em9e9fxuxOXQ9FdHV/ad0uzWJMxUZJl7Mj//NExGMekxpMAZtQAZ9dmr/3c08nORHN6USuvT927H1d2PL16kPcDsKVzZ3JVKo9qxGF2T0/nN0Fy7NBsGRwjDBQtjwOPFpYRoi0BeUIhhgWE4NRUHgdDwlT7p0FimIQ//NExDsgSxaYAY9AAUhQfbOMtEuXe2EMh2S7Won995/v2R79U5mYuPe/m6f+cf2sGjh4dsVCitxNQyzd+mn7vf0PKzRWVBufYpR/ipMzRQs5wBNVrxiYngTEiK9zrPg7//NExAwUogqMAdgQAM8tvCZl+8f/X9/mOOsxbTHY9YkoUrFa7No9zmob1oYxXKVjOXUvt76fyzNS+n+Z/CnUFkQVTUDVVbvEoLAUaRJLOkbBKtCFbrDFK+4OSuVr1hsA//NExAwSmL6MAMPGTKSYrG3Qd/Gb61mvC9Ez2Qpq4GaFiBFgAMh8Pid9Dp0P2h9prufXLwwXC29Q2hIuXPgcMWF13D3+nttdmfnyCrPLsQSrBQlBEYCGFjmSQouYB2AG//NExBQWITqoAMsYcDv2QGEUzizp/r/35TZxle/OuRLDk+RFcEx/vvzOVve+/Ryk3xy+5hw4762quWkcAygqJ0+ro/3f3rQUYD4nCJdQgUcgSud519Sfshk79EhC1cJs//NExA4U4Uq0AMSWlFSDAG8Kya4zbct+YPznUYm1lF8q34Zj4Sm1A0d7zK/Y+vQMe8xBPLK4UPz0g+CUvUJmlwy/u/R//XMCVqziDB8kKvKDmorHv5qoE8b12+osU7k+//NExA0Sas60AMKKuLbGFK8vcqJXlvK+V8XHXQSVfAdI3KKMRRyEctKF+MDUdBoguQV8vm83/ToNZP///////39+qPsJY+Nx7V2apIhNAGFkyiQ8BVqRoNQDqLall1tX//NExBYQMTqwAJNGcHqf8L6dtqnTQSKjkDE+rqf7f2FsYCUTIsWvbVaxK3f/2fV/E/XsQWmwkB34wmCx0qDwnS4eov/////Dp/+X/oibf+//7fetU/raqbWYzPPY7oro//NExCgRCw64AEBEudMyFdTORitJYWwc0JOHcOORjmIM5QwzAhBIxcuqbhhX///r///5//L//Lp33fX/309U2p31NSj9bHslEoPHOqHmGRocqHTXZh9hg4uXJlxOeKWK//NExDYSgyK0ABBOvAqLiWKB0pDR8uD4RwgMNG7DQbk2Cv///////5f//////9df/WyfR7n90bzzzz0ZUYvYu6Iyjg4VG87OH1UcYsVeIwmJDUuNhscXdiTDQecbFhSN//NExD8R0yK0AAhOvEsJI/AqaLx96jH//r////3/////////9Pt2p8nVCLL0szs1ynQXF0dSFc4qJCqIOQk49BQVOIiYHMU40TccFCaiwYyCI9xUJnAgCistB//////+//NExEoQ6xq0AAhKvXU1rtvVmXPMvq1FefaiGjyM1WUwwix7DJEeYaOYKDRuNiY1HmKkiQYFg2OJFxMPikiUME40UVDUoOKKCDf////f//xH/zL/Uu/cz/8O5/c291HK//NExFkQGxq0AAgOvVrLxUoeylPEzAdCGPqzpRRrnFFj6D7GuzyKSJhOLlBtTjzwbMMEMQQcLQRRz1UUob////9////////2/1mUqOrb1L0M/U2hjGcpsodaUpg8Yzyq//NExGsRaxqwACgQvVUql+gsIlUpWUzshlKHQ65SysJB5xErILOIgCyOIipQ6yobqMIhioIACHwRNOwaNCrjgGeVe19AeS51+7bU/+dOoYdIqApHh31uWIiowYgVcdcH//NExHgRixKgABBKuHHnbFItej3tUeaeR8ZVMriLB8xo9VeqytxvsZ9s/v8dbpbmAOC4LH3sMDSLgOVGkCg29tjmKlluRIkVTKrRXxVbrZ1mbIq6EztP9frQ6halH5yw//NExIQPiCpMAMpQAOwgSk/jlgHphfwY5EFPzQzJcgCWiy8egwg8GHiOYeol/yTNzMe5LgyEkeHiLX8OYPQlDc4UBPwvA4RkiTAnv8ch43UhJMEEHgaApx4l4Ob/x7m5//NExJgQYFY8AVoYAKIIEuX02HcUC4Xi8m5gb//rTbrduamRJyUWZpG5imr//9C//0S+mYn11m69w6ezHbLsIfmkqfcw6bsJiMQysVqa1T/vHHf//D5axznf9azWxtO1//NExKkgwxqUAY9oARDnNhqx9ZI+s3IUkDqLkVyWmJQ9DqEzQIpH4BInUSiWQKlm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/962HhEMHDh7iyBdoqYVllHrkNnhpcpJ6AkegGXhdzPFWfuLduOu+Mokbw4FBHEJCgP06f+o24IHU3VIqACSO7////QQHEgq//NExDkRaH6gAM6eSCwsPAZUQjiB4kWaXMKxrnX9E5isaWXI4Knma4z6vks2bNftcR/i0ibtq9AoDCdXLIx9Be/v5339Pi13RirlKqXirbl/////vtHMNkxUNDDgTU4d//NExEYReT6gAMvOcMbfM3bBYWm8zbgIAo4zuX2X/mTvNogY1ndEaRrt5P/6U5W3//Rk0ShCZxYgTeJ3h+IFHC+XB+cresCChfL8aaa6NHjgAwfF1VyjAOZE///////+//NExFMR0bq0AMCElF0n8/rdKy+8hk/sapLhwP8QZE98WcJuFg8+oHF1vZTlzBta7klpuopTcwdShHQfyLYx8wr////////////s+Y+NU7ra2+4byqzdk3V3hHTzYUCg//NExF4PMvrEABAGuaQTQkhVOYhqVsGqBLHEyZh65ABZI04igQcu2IpAhNxxJorQ+qWamBFrKk///////3tJ+yEsqOhHOh2RVHIMKohHqyncPGD5BhR0c4iiixo1g6Li//NExHQSixq8ABAMvYgsHRATOHA8kpBg8EKLlFodF0FhVIxqFhj09/2/////sn/////l8sqKTGvtf/y+7H1esak1Ew50BI1hwCHEykq8Aur5KJUox+qwyoUoUAm4zaqA//NExHwP4x68AAgKvICgras1XCiVCtUj248OCkwFzhRIUSYGFXLJJRpqVO3Os0EbPDSxFW46WDTnmiIUfDQFHzrWHkllSLg1WAjQi1FSoiLJURnvhIY+VFDSoVU4FXCH//NExI8RWx6sABBGvLM5A0hmvvPOVpJbx6jG0moNSZhRXnCFbOvAiFE1KheAjF4gSpo4mGzrWHjQRmRNIjxzBRVBTsfVy72n/i78emxSmP//Mx44QnAUMOCj8sPYe/0Z//NExJwRIDJcAMMGAN0dNZ7aw7Yx1vnO4a7jGwWnta0f1xjoolgUkJhwENsHopNvS4V2WuOdTemz433J8WfbU/9f1yaMgxi+p1U+6gLxAi70rlA3yPzNozu8wOXvyUoF//NExKoSeMo0ANmGcLLsHrY55Zr6Qr8JJKf91IX1bDnL5AsTz0HyARkxVWooTQt5Tbz5WFw+C14tpE69kfl6SOZmZmZulsmPOvW2rDM8bjze/5mZmZmZlC2Ladnz34vh//NExLMQuLo8AVsYAF+/GG2A3/uDbLQNvU9TFlHlD7ApwKaM0SqYDxAYc46pg3/+3/brlam7q0pSlOhhce8rmOIikgsHRQYQLdBQjipRZxwkAzTYNH7uwRWZZTCpiv/+//NExMMfulqgAY9gAH3qTT7XLVW7SSqhFfjvRfSKM1GGws5BOWNArDr9LzJtZ31PrWac6lrlnWXNFh2mx0wPg8FwooG5MNE3MhcPLJYex0NwuGKyQG1dnHogmigO1JFF//NExJcSmXasAdIoAIuH1olh4sWkoqZkqm6ntor39a1++paXWm26DPOqrZIcheLJmUyVNEUzIyPqRUamzJucMUjhQ/aQSHKBS2wHV2bPvPtobEFuJT46Qqs/m+RluVf3//NExJ8guwqYAMtaufJepK+hMW6DRUisBeVKFQHgxYKbjHDvXYi1euUNjBxs2ssRvJT38BGSUsriX/1Yjn7yPZtcvBtHpn/01/v//7z/n/4zrO87/+b51n5+M/XrbdZa//NExG8hgxKUANqeuWoEzZVync8Mlo0DVNZxAtXeMxKXjTVasWc5gQrTemKeVRZmwPB01nLiYuf6+srbnVdTdZt1mXWdPdyzRJ48lpHS+DmWgZKEyPG5kXAmrEAvj8F1//NExDwdqw6cANNauRzF5jUfHaeMFspJMmIso4WOZ1lw+tNy+avu29Kg3b/2q+vt9SSNkEqk3TPGqzM86Kl3RukilTUsvYbFs93WChSIshsyBQhX1VGFgCH///v/7f6///NExBgQYUasAMFEcHKDI6BQQpRwNgwpQRlGEQcDYDBJSFkkINixtZhbMWa5zSVX7f98tRRxVR1MSi4bYARScoRoHUFkapJOat//+tP/6t6lloxnYxkMFM2hjaKVsMKU//NExCkQqWqMAU0QACgdlXWSUqEkCj4KnTodPRoCQIlnuJjxL/yycQuUGQJLn46AT29omzdLppF3O88veXrSdtEMVhcOHL1qspJwtMLp8LoLV7uzAYCAMEA0tA61AK+p//NExDkfyyZYAZmYAFtZ0WsH1C0MOnDE44yferV1eMwVSfIufNAur//V8ryBjnlcXAdNyh///+RQqE+YIMmmVCbK5p/////mjOimggaGBFCoXy/VGsI2Gm6OVsFyFoPH//NExAwT4RaoAYlAAIMrNUz7TuzMKuURGkmlyKINsR2hRFARBQMOw20WZBe0SwwFwydh1QAN2NCc/SlSIhsjQvlHKsE4oXwUSJzKP/KM9NaltWo+x/t1Lx4ltU2+fZ+P//NExA8SSiqUAc8QAPON6r671zXSYwZyhRJDgLOJKlJqPRHfpZytShH+3T0//6cxt6s7VKyGuYMKWMEq3dq87LFeJVOh14sqbmqCFgRSdIoHEWdrREISdCGImMuJmhbm//NExBgSqLZ0ANPETNv59Xy0qR6PMGzjlQmGygyRelJpTA4s2dFPZTZbq6Nw98ftQt6lvSxZRNHtUp6VKHaotZRdpLpenjOH0KqT94OxbJgJoEcMS2XkTV7w73xePi+///NExCAU4SqYAMPScD2m5o2/RhG/BWFx8UMyij/82/nh9vr7C0m1A2D4gT5OUXOCDHO/+q3qcXX/91ZQo5Z84TXv4zSqxxSt+40dNY1FBU1MZyHCQhGzrpmZ/Hv9vN+f//NExB8XOT60AMPYcDiJWk+45BEwyX3zDDw6A2XSOWKlimsUX79WGX25u/THrl9W4cMDH7l5DY6UAdfZ///vS1bj6TIkMtWeFjky9ZZAVck1MQICJAA4nMycxNCRM3dG//NExBURoUbEAJQMcJIKWix9C1PsVVSYfflEGUPHDiyzvuz5+3Pn41ajcYjBuAVzjNzL2Z03Z////7ujs3jaWrUPkBkCmenSOBWgAbJsgkk6n6SSXq/9mNYdaAyAnCoH//NExCEQoNa8AINGcDUtbVpFbgMVB1Hy/vrFPrW+73584cE44wT9/Mw+6QKLYYr5gDgDs25rI7f////LMj+c////9/7bfX/rZuyOSyJyIpV1ZZzOV3kOVnDgmLFuc6Ln//NExDER2w7AADhKuRcjB0WKccLuAAiNOISiDHUc5CBMXHz1MvF/9Kf/2T/90Of7fo69jtf6Omw8cac7kSJ001jmLmoceoklFEma4mEkIheIo+xwihQSBKEoRRqeLRUS//NExDwPMxq4AAgOvZkRwco9R3/////5zw4n8v/5/4udT//352h3X2R76/06Obqabc036mmmm0OOc001HQ5zRqNShKg2B8D4uC0BotjxIeJDo1GrDxonVBxNhjuyqLNe//NExFIR+x6YADhOvKa7na3jl2z3F06EzmyHKtFLz+67bIiyv1fQyf///2//+hlZO6Woahjej8y6+9LrQ2apWTYMgosWX5bbmGVsAj8BwryZXF4diligw/Ornq3zPLn5//NExF0Rqt5IANBEuWPMPJXyWTz+oukQ9A8k1BQa2kvJHA23FHMse63jVO10y6+hicaha/1NqHdSHmYsHfVl0rty9uD/NwidTCBmSMnhiroVjqNZIEMmd2Zlh4oM0VK7//NExGkQaNI4AVgYAL8gygfkXE5UtHobb/+i8mMeaIGMlpDnP/882DycWH8yROrXX//8S19vfdHlVUHJnHN////tlPfs35uqkqjoJWO8vKzMe/////9djJv3/mk/jcVm//NExHog4yqIAZhYAKhnCXbCMWImpPrVfcmAAMARDwY0IM8B3DrVc80OH8fe/f9if8jdG6JK5wOedQM5JzEI0858izoHdFvR+v92j09Vu5eiF9hylqVuouZf1LQanGZq//NExEkQMU60Ac8QABswGNA2QMmepdAbZKOXC4Yqd01Let2d33TTQsZIKW7eRUxBBz4ERlUaYRlKbjTNFE9JGkBCSHSyOTSB+ZWp8UFnFT4woNKnqv///0qOsU/9egbV//NExFsWiXK4AMNSlPw28ZZpa1qoIztFk02luECyAwgAoda7PoZ3RaycrqViqzG5vy9kFLCSVIlpQimbhWHRF2BjQJIqAC4AA0dfGaitc8j////W7d+2tZZrg3Q6XStE//NExFMSoUq4AMFMlNvl63PzRcAIMKQ37VKxvq3a/yObKTdEwCAlDCmaqjbMw4CTUM4ijniKRNUu4lc2ti1fZf//kf9aCyIVk+A2olDQg4gqQhcL45pVZaLK//9LP6X0//NExFsP6U6kAHiGlL79UqurGusAjUwomA1iIeCozLX2FiVYz5FQ8Y8KDw0IhKVO2npXI/0pMLRQhQMTKBKdO0Di/KfMpdjNWADAl69O8ai66CK2UbEuRRmSUnW8ckYY//NExG4RAQ50AVMYAJ0FwK2Wp+ejrIEI8o1P0a3DCgfGSYrYQYLLev3elaMeNoUoKUPMLAr/ZW/cZcri4yOHAMwThoLBv/9nv0bkPK4zZeJwwNFoMmr+v/+9lf1m5vc3//NExH0gqypMAZuAADBlIUDpvThgf4Q/P0MrnxxccnzAYOq17m0CuRzdQoiNmqb8Z/twXLMo9J1ieV0WewOCcaB0+cGgsoKQNrICqILEA4snkUa5gkmuLI0EhhkFmFBT//NExE0fClaYAYxIAA2crn7xnrbtZXEscVfHZxhC99Znv8xBJit9bdS+ZJMGBwNiA5/GwABwgWckqoJ0KpblKzC1sDZ2wl115Q0W7W8lZCkwIjJ6XHuGHP/XMyL/h7j///NExCMSaTaoAdgwAMTd3d/HTJsEJpkIjE4yjPy97TD4XsilUtUhpMUm06P////7k328nedmAOilpmWBzrtkibZIAE4GhAigKVNkysa3agk6boo/KnJVW82bEYruaNqE//NExCwSUSqoAMTScOMuRQYaxmeW7fl4k0vYq2nu0NDC3KZV//////9alcNqzHFNJETHB3rgJelzoVYA+SWH0KBLToa9SLrapHPP9fMpm6UlAy0kMkSIo2zm7tVGrjDf//NExDURGSagAMTScNZUKhpDWP0fr2/////p/Wr7UBgZ0vqgAsIligsckoW5DQSuYF5J7761rRU7/b2DKGWKDGaxxRjVxQ8YVsL6f/J/79GIDnU6czmTDK3qwfB/cQpu//NExEMQYNKgAMQEcEkStg2uI52/P/8uf/WRz//f/+//2/12P7stnRKk+ydspllOdFMqnUiecqCJg7tuzISHBB2AyOgAQhBYM4IQwsDFkOVyDU0g6P/+v/////y///X///NExFQRqw6wAFhEuVO/+uv/+87+s9aXS7ObmOxtHpU2XMZZpzKVPOLTFc44bIrFCBhEbg4Q2SGwoHyZMiUceNHB4o7CCA5F/////////TsRKfR0VmcqkQzFIYzniTCT//NExGARKxawABBOuQtGqYqFYQEgoxhcwoA48QHIrDAiULOJiAGIERMgdYBhAOB4cKiofCITF826OCqb/////r79PKWVqlqVCqVilKVC0epWlSjo5juVlKkowVSYSHlr//NExG4RoxKsACgKuVKHSmOUIjw6HREOh0OkDzIJB4XAEVFS1QFbGPLwrVCy1nHvrb/////z///////+mb6lZcxjUM9Stq02lDGlL9AJ2MoCcpWCgJYYqOVJWUMcpvCm//NExHoPixqcACgKvAzlQ5UMVgzlNMBFOMIOiTrjgCvdFBFP2X2tiqbogK6LDFnhUIAikY0hFw2DoxpwstSzqG0ourUt0UW8c0hJPS9143ddbVo5PoQ23qNI2pUzuRVw//NExI4Rgx5gAJBE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" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                </audio>
+              
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Downloading-YouTube-videos">Downloading YouTube videos<a class="anchor-link" href="#Downloading-YouTube-videos"> </a></h2>
 </div>
 </div>
@@ -709,32 +895,6 @@ you want them to say. You can check the status of the video using
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Generating video. This will take a few minutes.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;status&#39;: True,
- &#39;message&#39;: &#39;Your video has been added to the queue for processing. Please check back in 10-15 minutes&#39;,
- &#39;url&#39;: &#39;https://staging.deepword.co/video/u5miip0ko0dfy46&#39;}</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
