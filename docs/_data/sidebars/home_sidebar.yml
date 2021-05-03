@@ -19,6 +19,9 @@ entries:
     title: dword
   - folderitems:
     - output: web,pdf
+      title: Using different input types
+      url: /tutorials.input_types
+    - output: web,pdf
       title: Creating educational videos
       url: /tutorials.educational
     - output: web,pdf
