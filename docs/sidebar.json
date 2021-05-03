@@ -5,6 +5,7 @@
     "Utils": "utils.html"
   },
   "Tutorials": {
+    "Using different input types": "/tutorials.input_types",
     "Creating educational videos": "/tutorials.educational",
     "Customizing sales videos": "/tutorials.sales"
   }
