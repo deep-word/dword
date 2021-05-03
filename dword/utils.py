@@ -116,6 +116,7 @@ def trim_video(video: Union[str, Path], start_time: int, end_time: int, outfile:
     """
     ffmpeg_extract_subclip(f"{video}", start_time, end_time, targetname=f"{outfile}")
     print(f'Successfully trimmed video!')
+    return outfile
 
 # Cell
 def check_resolution(video: Union[str, Path]) -> Dict:
@@ -159,3 +160,4 @@ def trim_audio(audio: Union[str, Path], start_time: int, end_time: int, outfile:
 
     f = f[start_time:end_time]
     f.export(outfile, format = o_ext)
+    return outfile

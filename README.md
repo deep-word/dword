@@ -2,20 +2,15 @@
 > An amazing library to create synthetic videos
 
 
-```python
-import os
-
-from nbdev import show_doc
-from dword.core import DeepWord
-```
-
 ## Installation
 
 Install the dword library
 
-```
+```python
 pip install dword
 ```
+
+Make sure you have [ffmpeg installed](https://ffmpeg.org/download.html).
 
 ## Quick start
 
@@ -25,13 +20,13 @@ Start by [logging into your DeepWord account](https://login.deepword.co/user/sig
 
 ![test_image](images/api_key.png)
 
-Use these keys to login to your account in Python
+Also make sure you have enough credits available in your account to generate videos. You will use these keys to login to your DeepWord account
 
-```python
+```
 from dword.core import DeepWord
 ```
 
-```python
+```
 acc = DeepWord(API_KEY, SECRET_KEY)
 ```
 
@@ -39,10 +34,12 @@ acc = DeepWord(API_KEY, SECRET_KEY)
 
 
 ### Step 2: Start creating videos
-{% include tip.html content='That&#8217;s it!!!!' %}
-Now you can start creating synthetic videos. All you need is a video of the person talking and the audio you want them to say.
 
-```python
+**That's it!!!!**
+
+You can now start creating synthetic videos. All you need is a video of the person talking and the audio you want them to say. In this quick start tutorial, we will use a video and audio we already have. To learn more about different ways to use video and audio, refer the tutorials tab
+
+```
 acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4')
 ```
 
@@ -60,7 +57,7 @@ acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4
 
 {% include important.html content='The video can take a few minutes to generate. You can find the status of the video by retrieving a list of all videos on your account' %}
 
-```python
+```
 acc.list_videos()[-1]
 ```
 
