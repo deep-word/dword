@@ -77,8 +77,7 @@ class DeepWord:
 
     def _available_speakers(self, lang) -> List: return TextDicts.speakers[lang]
 
-    def text2speech(self, text: str, language: str = None, speaker: str = None, outfile = 'text2speech.mp3') -> str:
-        "Get audio from text using speaker's voice. Output will be stored as outfile"
+    def text2speech(self, text: str, language: str, speaker: str, outfile = 'text2speech.mp3') -> str:
         if language not in self._available_languages:
             raise ValueError(f'Language {language} not available. To see available languages print obj._available_languages')
 
