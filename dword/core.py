@@ -84,6 +84,9 @@ class DeepWord:
         if speaker not in self._available_speakers(language):
             raise ValueError(f'Invalid model for language {language}. To see available models print obj._available_speakers(language)')
 
+        if Path(outfile).exists():
+            os.remove(f'{outfile}')
+
         code = TextDicts.lang2code[language]
         sp, gender = speaker.split(' ')
 
