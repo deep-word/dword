@@ -98,7 +98,8 @@ class DeepWord:
             decode_bytes = base64.b64decode(response.text)
             with open(outfile, "wb") as wav_file:
                 wav_file.write(decode_bytes)
-            return (f"Successfully generated audio file {outfile}")
+            print(f"Successfully generated audio file {outfile}")
+            return f'{outfile}'
         except Exception as e:
             raise ValueError(response.text)
 
