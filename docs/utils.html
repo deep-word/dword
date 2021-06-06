@@ -47,7 +47,7 @@ nb_path: "01_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="to_hhmmss" class="doc_header"><code>to_hhmmss</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L95" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_hhmmss</code>(<strong><code>x</code></strong>:<code>int</code>)</p>
+<h4 id="to_hhmmss" class="doc_header"><code>to_hhmmss</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_hhmmss</code>(<strong><code>x</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Convert time from secs (int) to hh:mm:ss (str).</p>
 
@@ -171,7 +171,7 @@ nb_path: "01_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="to_secs" class="doc_header"><code>to_secs</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_secs</code>(<strong><code>x</code></strong>:<code>str</code>)</p>
+<h4 id="to_secs" class="doc_header"><code>to_secs</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_secs</code>(<strong><code>x</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Convert time from hh:mm:ss (str) format to seconds (int).</p>
 
@@ -286,6 +286,61 @@ nb_path: "01_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="display_video" class="doc_header"><code>display_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L117" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>display_video</code>(<strong><code>video</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="display_audio" class="doc_header"><code>display_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>display_audio</code>(<strong><code>audio</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
@@ -328,7 +383,7 @@ nb_path: "01_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trim_video" class="doc_header"><code>trim_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_video</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_video.mp4'</code></em>)</p>
+<h4 id="trim_video" class="doc_header"><code>trim_video</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_video</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_video.mp4'</code></em>)</p>
 </blockquote>
 <p>Trim a video in place from start (secs) to end (secs). If you don't want to trim inplace, provide output filename.
 For youtube videos you can use <code>download_youtube_video</code> before trimming them.</p>
@@ -439,7 +494,7 @@ Successfully trimmed video!
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_resolution" class="doc_header"><code>check_resolution</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_resolution</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Check the resolution of a video.</p>
 
@@ -521,7 +576,7 @@ Successfully trimmed video!
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="check_fps" class="doc_header"><code>check_fps</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L144" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_fps</code>(<strong><code>video</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Get the fps of a video</p>
 
@@ -610,7 +665,7 @@ Successfully trimmed video!
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
+<h4 id="change_audio_format" class="doc_header"><code>change_audio_format</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>change_audio_format</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>])</p>
 </blockquote>
 <p>Change the format of audio file. Example, converting mp3 to wav. Works with
 all formats supported by ffmpeg.</p>
@@ -705,7 +760,7 @@ all formats supported by ffmpeg.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L151" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
+<h4 id="trim_audio" class="doc_header"><code>trim_audio</code><a href="https://github.com/deepword18/dword/tree/master/dword/utils.py#L164" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trim_audio</code>(<strong><code>audio</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>start_time</code></strong>:<code>int</code>, <strong><code>end_time</code></strong>:<code>int</code>, <strong><code>outfile</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>]=<em><code>'trimmed_audio.mp3'</code></em>)</p>
 </blockquote>
 <p>Trim an audio file. Start and end times are in seconds. Works with all formats supported by ffmpeg.</p>
 
