@@ -153,7 +153,7 @@ class DeepWord:
         """Download a video from YouTube. You can also donwload an audio by providing
            types = 'audio'.
         """
-        folder = Path(folder)
+        folder = Path(folder) / types
         folder.mkdir(exist_ok=True)
         if types == "video":
             pytube.YouTube(url).streams.get_highest_resolution().download(folder)
