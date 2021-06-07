@@ -143,7 +143,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>994</pre>
+<pre>929</pre>
 </div>
 
 </div>
@@ -803,7 +803,7 @@ types = 'audio'.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">account</span><span class="o">.</span><span class="n">download_youtube_video</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">types</span> <span class="o">=</span> <span class="s1">&#39;audio&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -815,126 +815,9 @@ types = 'audio'.</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">HTTPError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-32-9f4fb99848e3&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>account<span class="ansi-blue-fg">.</span>download_youtube_video<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">,</span> types <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;audio&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-4-376260a442e0&gt;</span> in <span class="ansi-cyan-fg">download_youtube_video</span><span class="ansi-blue-fg">(self, url, types, folder)</span>
-<span class="ansi-green-intense-fg ansi-bold">    134</span>             print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;downloaded youtube video successfully!&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    135</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 136</span><span class="ansi-red-fg">             </span>yt <span class="ansi-blue-fg">=</span> YouTube<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    137</span>             stream <span class="ansi-blue-fg">=</span> yt<span class="ansi-blue-fg">.</span>streams<span class="ansi-blue-fg">.</span>filter<span class="ansi-blue-fg">(</span>only_audio<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>first<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    138</span>             out_file  <span class="ansi-blue-fg">=</span> stream<span class="ansi-blue-fg">.</span>download<span class="ansi-blue-fg">(</span>folder<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/site-packages/pytube/__main__.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, url, defer_prefetch_init, on_progress_callback, on_complete_callback, proxies)</span>
-<span class="ansi-green-intense-fg ansi-bold">    100</span> 
-<span class="ansi-green-intense-fg ansi-bold">    101</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> defer_prefetch_init<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 102</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>prefetch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    103</span>             self<span class="ansi-blue-fg">.</span>descramble<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    104</span> 
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/site-packages/pytube/__main__.py</span> in <span class="ansi-cyan-fg">prefetch</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    194</span>         self<span class="ansi-blue-fg">.</span>initial_data <span class="ansi-blue-fg">=</span> json<span class="ansi-blue-fg">.</span>loads<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>initial_data_raw<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    195</span> 
-<span class="ansi-green-fg">--&gt; 196</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>vid_info_raw <span class="ansi-blue-fg">=</span> request<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>vid_info_url<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    197</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>age_restricted<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    198</span>             self<span class="ansi-blue-fg">.</span>js_url <span class="ansi-blue-fg">=</span> extract<span class="ansi-blue-fg">.</span>js_url<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>watch_html<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/site-packages/pytube/request.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(url, extra_headers)</span>
-<span class="ansi-green-intense-fg ansi-bold">     40</span>     <span class="ansi-green-fg">if</span> extra_headers <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     41</span>         extra_headers <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
-<span class="ansi-green-fg">---&gt; 42</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> _execute_request<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">,</span> headers<span class="ansi-blue-fg">=</span>extra_headers<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>decode<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;utf-8&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     43</span> 
-<span class="ansi-green-intense-fg ansi-bold">     44</span> 
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/site-packages/pytube/request.py</span> in <span class="ansi-cyan-fg">_execute_request</span><span class="ansi-blue-fg">(url, method, headers)</span>
-<span class="ansi-green-intense-fg ansi-bold">     24</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     25</span>         <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Invalid URL&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 26</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> urlopen<span class="ansi-blue-fg">(</span>request<span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># nosec</span>
-<span class="ansi-green-intense-fg ansi-bold">     27</span> 
-<span class="ansi-green-intense-fg ansi-bold">     28</span> 
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-fg">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="ansi-green-intense-fg ansi-bold">    220</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    221</span>         opener <span class="ansi-blue-fg">=</span> _opener
-<span class="ansi-green-fg">--&gt; 222</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> opener<span class="ansi-blue-fg">.</span>open<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">,</span> timeout<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    223</span> 
-<span class="ansi-green-intense-fg ansi-bold">    224</span> <span class="ansi-green-fg">def</span> install_opener<span class="ansi-blue-fg">(</span>opener<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">open</span><span class="ansi-blue-fg">(self, fullurl, data, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">    529</span>         <span class="ansi-green-fg">for</span> processor <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>process_response<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>protocol<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    530</span>             meth <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>processor<span class="ansi-blue-fg">,</span> meth_name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 531</span><span class="ansi-red-fg">             </span>response <span class="ansi-blue-fg">=</span> meth<span class="ansi-blue-fg">(</span>req<span class="ansi-blue-fg">,</span> response<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    532</span> 
-<span class="ansi-green-intense-fg ansi-bold">    533</span>         <span class="ansi-green-fg">return</span> response
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">http_response</span><span class="ansi-blue-fg">(self, request, response)</span>
-<span class="ansi-green-intense-fg ansi-bold">    638</span>         <span class="ansi-red-fg"># request was successfully received, understood, and accepted.</span>
-<span class="ansi-green-intense-fg ansi-bold">    639</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">200</span> <span class="ansi-blue-fg">&lt;=</span> code <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">300</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 640</span><span class="ansi-red-fg">             response = self.parent.error(
-</span><span class="ansi-green-intense-fg ansi-bold">    641</span>                 &#39;http&#39;, request, response, code, msg, hdrs)
-<span class="ansi-green-intense-fg ansi-bold">    642</span> 
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">error</span><span class="ansi-blue-fg">(self, proto, *args)</span>
-<span class="ansi-green-intense-fg ansi-bold">    561</span>             http_err <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
-<span class="ansi-green-intense-fg ansi-bold">    562</span>         args <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>dict<span class="ansi-blue-fg">,</span> proto<span class="ansi-blue-fg">,</span> meth_name<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> args
-<span class="ansi-green-fg">--&gt; 563</span><span class="ansi-red-fg">         </span>result <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_call_chain<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    564</span>         <span class="ansi-green-fg">if</span> result<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    565</span>             <span class="ansi-green-fg">return</span> result
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">_call_chain</span><span class="ansi-blue-fg">(self, chain, kind, meth_name, *args)</span>
-<span class="ansi-green-intense-fg ansi-bold">    500</span>         <span class="ansi-green-fg">for</span> handler <span class="ansi-green-fg">in</span> handlers<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    501</span>             func <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>handler<span class="ansi-blue-fg">,</span> meth_name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 502</span><span class="ansi-red-fg">             </span>result <span class="ansi-blue-fg">=</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    503</span>             <span class="ansi-green-fg">if</span> result <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    504</span>                 <span class="ansi-green-fg">return</span> result
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">http_error_302</span><span class="ansi-blue-fg">(self, req, fp, code, msg, headers)</span>
-<span class="ansi-green-intense-fg ansi-bold">    753</span>         fp<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    754</span> 
-<span class="ansi-green-fg">--&gt; 755</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>parent<span class="ansi-blue-fg">.</span>open<span class="ansi-blue-fg">(</span>new<span class="ansi-blue-fg">,</span> timeout<span class="ansi-blue-fg">=</span>req<span class="ansi-blue-fg">.</span>timeout<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    756</span> 
-<span class="ansi-green-intense-fg ansi-bold">    757</span>     http_error_301 <span class="ansi-blue-fg">=</span> http_error_303 <span class="ansi-blue-fg">=</span> http_error_307 <span class="ansi-blue-fg">=</span> http_error_302
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">open</span><span class="ansi-blue-fg">(self, fullurl, data, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">    529</span>         <span class="ansi-green-fg">for</span> processor <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>process_response<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>protocol<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    530</span>             meth <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>processor<span class="ansi-blue-fg">,</span> meth_name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 531</span><span class="ansi-red-fg">             </span>response <span class="ansi-blue-fg">=</span> meth<span class="ansi-blue-fg">(</span>req<span class="ansi-blue-fg">,</span> response<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    532</span> 
-<span class="ansi-green-intense-fg ansi-bold">    533</span>         <span class="ansi-green-fg">return</span> response
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">http_response</span><span class="ansi-blue-fg">(self, request, response)</span>
-<span class="ansi-green-intense-fg ansi-bold">    638</span>         <span class="ansi-red-fg"># request was successfully received, understood, and accepted.</span>
-<span class="ansi-green-intense-fg ansi-bold">    639</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">200</span> <span class="ansi-blue-fg">&lt;=</span> code <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">300</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 640</span><span class="ansi-red-fg">             response = self.parent.error(
-</span><span class="ansi-green-intense-fg ansi-bold">    641</span>                 &#39;http&#39;, request, response, code, msg, hdrs)
-<span class="ansi-green-intense-fg ansi-bold">    642</span> 
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">error</span><span class="ansi-blue-fg">(self, proto, *args)</span>
-<span class="ansi-green-intense-fg ansi-bold">    567</span>         <span class="ansi-green-fg">if</span> http_err<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    568</span>             args <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>dict<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;default&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;http_error_default&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> orig_args
-<span class="ansi-green-fg">--&gt; 569</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call_chain<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    570</span> 
-<span class="ansi-green-intense-fg ansi-bold">    571</span> <span class="ansi-red-fg"># XXX probably also want an abstract factory that knows when it makes</span>
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">_call_chain</span><span class="ansi-blue-fg">(self, chain, kind, meth_name, *args)</span>
-<span class="ansi-green-intense-fg ansi-bold">    500</span>         <span class="ansi-green-fg">for</span> handler <span class="ansi-green-fg">in</span> handlers<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    501</span>             func <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>handler<span class="ansi-blue-fg">,</span> meth_name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 502</span><span class="ansi-red-fg">             </span>result <span class="ansi-blue-fg">=</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    503</span>             <span class="ansi-green-fg">if</span> result <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    504</span>                 <span class="ansi-green-fg">return</span> result
-
-<span class="ansi-green-fg">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ansi-cyan-fg">http_error_default</span><span class="ansi-blue-fg">(self, req, fp, code, msg, hdrs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    647</span> <span class="ansi-green-fg">class</span> HTTPDefaultErrorHandler<span class="ansi-blue-fg">(</span>BaseHandler<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    648</span>     <span class="ansi-green-fg">def</span> http_error_default<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> req<span class="ansi-blue-fg">,</span> fp<span class="ansi-blue-fg">,</span> code<span class="ansi-blue-fg">,</span> msg<span class="ansi-blue-fg">,</span> hdrs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 649</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> HTTPError<span class="ansi-blue-fg">(</span>req<span class="ansi-blue-fg">.</span>full_url<span class="ansi-blue-fg">,</span> code<span class="ansi-blue-fg">,</span> msg<span class="ansi-blue-fg">,</span> hdrs<span class="ansi-blue-fg">,</span> fp<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    650</span> 
-<span class="ansi-green-intense-fg ansi-bold">    651</span> <span class="ansi-green-fg">class</span> HTTPRedirectHandler<span class="ansi-blue-fg">(</span>BaseHandler<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-red-fg">HTTPError</span>: HTTP Error 404: Not Found</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>downloaded youtube audio successfully!
+</pre>
 </div>
 </div>
 
@@ -951,10 +834,24 @@ types = 'audio'.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">account</span><span class="o">.</span><span class="n">download_youtube_video</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>downloaded youtube video successfully!
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1027,7 +924,7 @@ you want them to say. You can check the status of the video using
 <div class="output_text output_subarea output_execute_result">
 <pre>{&#39;status&#39;: True,
  &#39;message&#39;: &#39;Your video has been added to the queue for processing. Please check back in 10-15 minutes&#39;,
- &#39;url&#39;: &#39;https://staging.deepword.co/video/u5mo6w4kplbj8mn&#39;}</pre>
+ &#39;url&#39;: &#39;https://staging.deepword.co/video/u5mocfokpmsr69j&#39;}</pre>
 </div>
 
 </div>
