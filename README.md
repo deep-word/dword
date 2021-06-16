@@ -22,11 +22,11 @@ Start by [logging into your DeepWord account](https://login.deepword.co/user/sig
 
 Use these keys to login to your DeepWord account via the Python api
 
-```python
+```
 from dword.core import DeepWord
 ```
 
-```python
+```
 acc = DeepWord(API_KEY, SECRET_KEY)
 ```
 
@@ -35,7 +35,7 @@ acc = DeepWord(API_KEY, SECRET_KEY)
 
 Now, make sure that you have enough credits available to generate synthetic videos.
 
-```python
+```
 acc.available_credits
 ```
 
@@ -54,7 +54,7 @@ You can now start creating synthetic videos. All you need is a video of the pers
 
 To learn more about different ways to use video and audio, refer our [tutorial here](https://deep-word.github.io/dword/tutorials.input_types).
 
-```python
+```
 acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4')
 ```
 
@@ -72,7 +72,7 @@ acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4
 
 {% include important.html content='The video can take a few minutes to generate. You can find the status of the video by retrieving a list of all videos on your account' %}
 
-```python
+```
 acc.list_videos()[-1]
 ```
 
@@ -92,7 +92,7 @@ acc.list_videos()[-1]
 
 Once the status changes from 'Queued' to 'Completed' you can either use `acc.download_video` or `acc.download_all_videos` to download your video.
 
-```python
+```
 acc.download_all_videos()
 ```
 
