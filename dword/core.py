@@ -154,7 +154,7 @@ class DeepWord:
            types = 'audio'.
         """
         folder = Path(folder) / types
-        folder.mkdir(exist_ok=True)
+        folder.mkdir(exist_ok = True, parents = True)
         if types == "video":
             pytube.YouTube(url).streams.get_highest_resolution().download(folder)
             print("downloaded youtube video successfully!")
