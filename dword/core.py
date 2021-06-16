@@ -206,23 +206,56 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
+    def trim_video(self, video: Union[str, Path], start_time: int, end_time: int, outfile: Union[str, Path] = 'trimmed_video.mp4') -> None:
+        """
+        Trim a video in place from start (secs) to end (secs).
+        For youtube videos you can use ``download_youtube_video`` before trimming them.
+        """
+        start_time = to_hhmmss(int(start_time)) # 0 -> 00:00:00
+        end_time = to_hhmmss(int(end_time))
+        if "Content-Type" in self.headers:
+            self.headers.pop("Content-Type")
+        url = URLs.trim_video
+        payload={"start_time": start_time,"end_time":end_time }
+        files = {'video': open(video,'rb')}
+        response = self.session.post(url, headers=self.headers, data=payload,files=files)
+        try:
+            r = self.session.get(response.json()['file_url'], stream=True)
+            with open(outfile, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=1024):
+                    if chunk: # filter out keep-alive new chunks
+                        f.write(chunk)
+            print('Successfully trimmed video')
+            return outfile
+        except Exception as e:
+            raise ValueError(response.text)
+
+
     def generate_video(self, video: str, audio: str, title: str = None):
         """Generate a synthetic video using a video of a person talking and the audio
            you want them to say. You can check the status of the video using
            ``list_generated_videos`` and download it using ``download_video`` or
            ``download_all_videos``
+        Args:
+            video (str): Video of the person you want talking.
+            audio (str): Audio you want the person to say.
+            title (str, optional): Optionally provide a title for the output. Defaults to
+                                   name of the video file.
+        Raises:
+            ValueError: If video or audio don't exist
         """
         if not _exists(video): raise ValueError(f'File not found {video}')
         if not _exists(audio): raise ValueError(f'File not found {audio}')
         payload = {}
         if title is not None:
             payload={'name': title}
-        self.headers.pop("Content-Type", None)
+        headers = {}
+        headers['api_key'] = self.headers['api_key']
+        headers['secerat_key'] = self.headers['secerat_key']
         url = URLs.generate_vid_url
         files = {'video_file': open(video,'rb'),'audio_file': open(audio,'rb')}
-        response = self.session.post(url, headers=self.headers,files=files,data=payload)
+        response = self.session.post(url, headers=headers,files=files,data=payload)
         try:
-            print('Generating video. This will take a few minutes.')
             return response.json()
         except Exception as e:
             raise ValueError(e)
