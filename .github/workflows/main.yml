@@ -13,6 +13,7 @@ jobs:
       run: |
         pip install nbdev jupyter
         pip install -e .
+        sudo apt-get update
         sudo apt install ffmpeg
     - name: Read all notebooks
       run: |
