@@ -149,23 +149,23 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_youtube_video(self, url: str, types: str = 'video', folder = 'youtube'):
-        """Download a video from YouTube. You can also donwload an audio by providing
-           types = 'audio'.
-        """
-        folder = Path(folder) / types
-        folder.mkdir(exist_ok = True, parents = True)
-        if types == "video":
-            pytube.YouTube(url).streams.get_highest_resolution().download(folder)
-            print("downloaded youtube video successfully!")
-        else:
-            yt = YouTube(url)
-            stream = yt.streams.filter(only_audio=True).first()
-            out_file  = stream.download(folder)
-            base, ext = os.path.splitext(out_file)
-            new_file = base + '_audio.mp3'
-            os.rename(out_file, new_file)
-            print("downloaded youtube audio successfully!")
+#     def download_youtube_video(self, url: str, types: str = 'video', folder = 'youtube'):
+#         """Download a video from YouTube. You can also donwload an audio by providing
+#            types = 'audio'.
+#         """
+#         folder = Path(folder) / types
+#         folder.mkdir(exist_ok = True, parents = True)
+#         if types == "video":
+#             pytube.YouTube(url).streams.get_highest_resolution().download(folder)
+#             print("downloaded youtube video successfully!")
+#         else:
+#             yt = YouTube(url)
+#             stream = yt.streams.filter(only_audio=True).first()
+#             out_file  = stream.download(folder)
+#             base, ext = os.path.splitext(out_file)
+#             new_file = base + '_audio.mp3'
+#             os.rename(out_file, new_file)
+#             print("downloaded youtube audio successfully!")
 
     def download_audio_samples(self):
         """Download all the audio samples available on the DeepWord website
