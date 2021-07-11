@@ -7,6 +7,8 @@
   "Tutorials": {
     "Using different input types": "/tutorials.input_types",
     "Creating educational videos": "/tutorials.educational",
-    "Customizing sales videos": "/tutorials.sales"
+    "Customizing sales videos": "/tutorials.sales",
+    "Testing video actors": "/tutorials.test_video_actors",
+    "Testing text2speech": "/tutorials.test_text2speech"
   }
 }

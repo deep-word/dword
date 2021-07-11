@@ -27,6 +27,12 @@ entries:
     - output: web,pdf
       title: Customizing sales videos
       url: /tutorials.sales
+    - output: web,pdf
+      title: Testing video actors
+      url: /tutorials.test_video_actors
+    - output: web,pdf
+      title: Testing text2speech
+      url: /tutorials.test_text2speech
     output: web
     title: Tutorials
   output: web
