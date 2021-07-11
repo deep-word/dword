@@ -12,7 +12,10 @@ index = {"DeepWord": "00_core.ipynb",
          "check_fps": "01_utils.ipynb",
          "play_audio": "01_utils.ipynb",
          "change_audio_format": "01_utils.ipynb",
-         "trim_audio": "01_utils.ipynb"}
+         "trim_audio": "01_utils.ipynb",
+         "change_volume": "01_utils.ipynb",
+         "loop_audio": "01_utils.ipynb",
+         "concat_audios": "01_utils.ipynb"}
 
 modules = ["core.py",
            "utils.py"]
