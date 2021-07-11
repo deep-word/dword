@@ -10,7 +10,7 @@ index = {"DeepWord": "00_core.ipynb",
          "display_video": "01_utils.ipynb",
          "check_resolution": "01_utils.ipynb",
          "check_fps": "01_utils.ipynb",
-         "display_audio": "01_utils.ipynb",
+         "play_audio": "01_utils.ipynb",
          "change_audio_format": "01_utils.ipynb",
          "trim_audio": "01_utils.ipynb"}
 
