@@ -246,8 +246,8 @@ class DeepWord:
         if not _exists(video): raise ValueError(f'File not found {video}')
         if not _exists(audio): raise ValueError(f'File not found {audio}')
         payload = {}
-        title = Path(title).stem
         if title is not None:
+            title = Path(title).stem
             payload={'name': title}
         headers = {}
         headers['api_key'] = self.headers['api_key']

@@ -42,7 +42,7 @@ acc.available_credits
 
 
 
-    9942
+    237
 
 
 
@@ -55,18 +55,15 @@ You can now start creating synthetic videos. All you need is a video of the pers
 To learn more about different ways to use video and audio, refer our [tutorial here](https://deep-word.github.io/dword/tutorials.input_types).
 
 ```
-acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video.mp4')
+acc.generate_video('Anna.mp4', 'my_audio.mp3', title = 'first_deepword_video')
 ```
-
-    Generating video. This will take a few minutes.
-
 
 
 
 
     {'status': True,
      'message': 'Your video has been added to the queue for processing. Please check back in 10-15 minutes',
-     'url': 'https://staging.deepword.co/video/u5mjcy5ko9e23m1'}
+     'url': 'https://login.deepword.co/video/b47y6adtqkkqzdycim'}
 
 
 
@@ -80,13 +77,13 @@ acc.list_videos()[-1]
 
 
     {'email': 'blablabla@yopmail.com',
-     'thumbnail': 'video_u5mjcy5ko9e23m1.mp4',
-     'title': 'first_deepword_video.mp4',
-     'video_url': 'https://videos-deep-word123.s3.us-east-2.amazonaws.com/output_data/u5mjcy5ko9e23m1.mp4',
-     'video_duration': '30.0000',
-     'video_id': 'u5mjcy5ko9e23m1',
-     'generate_date': '2021-05-04T02:04:26.000Z',
-     'output_status': 'Queued'}
+     'thumbnail': 'thubnail-b47y6abrm3kqbqc28t.png',
+     'title': 'Noelle',
+     'video_url': 'https://videos-deep-word123.s3.us-east-2.amazonaws.com/output_data/b47y6abrm3kqbqc28t.mp4',
+     'video_duration': '53.952',
+     'video_id': 'b47y6abrm3kqbqc28t',
+     'generate_date': '2021-06-25T02:43:03.000Z',
+     'output_status': 'Complete'}
 
 
 
@@ -95,6 +92,3 @@ Once the status changes from 'Queued' to 'Completed' you can either use `acc.dow
 ```
 acc.download_all_videos()
 ```
-
-    Successfully downloaded all videos in folder downloaded_videos!
-

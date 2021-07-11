@@ -15,7 +15,6 @@ import cv2
 from fastcore.test import *
 import imageio
 from IPython.display import Audio, Video
-# from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from nbdev.showdoc import *
 from pydub import AudioSegment
 
