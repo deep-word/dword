@@ -14,7 +14,8 @@ from typing import Dict, Union
 import cv2
 from fastcore.test import *
 import imageio
-from IPython.display import Audio, Video
+from IPython.core.display import Video
+from IPython.display import Audio
 from nbdev.showdoc import *
 from pydub import AudioSegment
 
