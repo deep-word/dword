@@ -4,7 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"DeepWord": "00_core.ipynb",
          "URLs": "01_utils.ipynb",
-         "TextDicts": "01_utils.ipynb",
+         "AzureDicts": "01_utils.ipynb",
          "to_hhmmss": "01_utils.ipynb",
          "to_secs": "01_utils.ipynb",
          "display_video": "01_utils.ipynb",

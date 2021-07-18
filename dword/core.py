@@ -18,7 +18,7 @@ import urllib3
 from pytube import YouTube
 
 from .utils import *
-from .utils import URLs, _exists, TextDicts
+from .utils import URLs, _exists, AzureDicts
 from nbdev.showdoc import show_doc
 
 urllib3.disable_warnings()
@@ -72,9 +72,9 @@ class DeepWord:
             raise ValueError(response.text)
 
     @property
-    def _available_languages(self) -> List: return TextDicts.langs
+    def _available_languages(self) -> List: return AzureDicts.langs
 
-    def _available_speakers(self, lang) -> List: return TextDicts.speakers[lang]
+    def _available_speakers(self, lang) -> List: return AzureDicts.speakers[lang]
 
     def text2speech(self, text: str, language: str, speaker: str, outfile = 'text2speech.mp3') -> str:
         if language not in self._available_languages:
@@ -86,7 +86,7 @@ class DeepWord:
         if Path(outfile).exists():
             os.remove(f'{outfile}')
 
-        code = TextDicts.lang2code[language]
+        code = AzureDicts.lang2code[language]
         sp, gender = speaker.split(' ')
 
         payload='{"text":"%s","name":"%s","gender":"%s","code":"%s"}'% (text,sp,gender,code)

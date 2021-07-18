@@ -4,6 +4,7 @@ __all__ = ['to_hhmmss', 'to_secs', 'display_video', 'check_resolution', 'check_f
            'change_audio_format', 'trim_audio', 'change_volume', 'loop_audio', 'concat_audios']
 
 # Internal Cell
+from collections import defaultdict
 import os
 import subprocess
 import time
@@ -34,64 +35,134 @@ class URLs:
     trim_video = 'https://youtube.deepword.co:5000/api_trim_video'
 
 # Internal Cell
-class TextDicts:
-    langs = ["arabic", "bengali", "chinese", "czech", "danish", "dutch", "english_aus", "english_ind",
-             "english_uk", "english_us", "filipino", "finnish", "french_canada", "french", "german",
-             "greek", "gujarati", "hindi", "hungarian", "indonesian", "italian", "japanese", "kannada",
-             "korean", "malayalam", "mandarin", "mandarin_taiwan", "norwegian", "polish", "portuguese_brazil", "portuguese",
-             "russian", "slovak", "spanish", "swedish", "tamil", "telugu", "thai", "turkish", "ukrainian"]
+class AzureDicts:
+    langs = ["arabic_egypt", "arabic_saudi_arabia", "bulgarian", "catalan", "czech", "welsh", "danish", "german_austria",
+             "german_switzerland", "german_germany", "greek", "english_australia", "english_canada", "english_uk",
+             "english_hongkong", "english_ireland", "english_india", "english_new_zealand", "english_philippines",
+             "english_singapore", "english_us", "english_south_africa", "spanish_argentina", "spanish_colombia",
+             "spanish_spain", "spanish_mexico", "spanish_us", "estonian", "finnish", "french_belgium", "french_canada",
+             "french_switzerland", "french_france", "irish", "gujarati", "hebrew", "hindi", "croatian", "hungarian",
+             "indonesian", "italian", "japanese", "korean", "lithuanian", "latvia", "marathi", "malay", "maltese",
+             "norwegian", "dutch_belgium", "dutch_netherlands", "polish", "portuguese_brazil", "portuguese_portugal",
+             "romanian", "russian", "slovak", "slovanian", "swedish", "swahili", "tamil", "telugu", "thai", "turkish",
+             "ukranian", "urdu", "vietnamese", "chinese_mandarin", "chinese_cantonese", "chinese_taiwanese"]
 
-    codes = ["ar-XA", "bn-IN", "yue-HK", "cs-CZ", "da-DK", "nl-NL", "en-AU", "en-IN", "en-GB",
-             "en-US", "fil-PH", "fi-FI", "fr-CA", "fr-FR", "de-DE", "el-GR", "gu-IN", "hi-IN",
-             "hu-HU", "id-ID", "it-IT", "ja-JP", "kn-IN", "ko-KR", "ml-IN", "cmn-CN", "cmn-TW", "nb-NO",
-             "pl-PL", "pt-BR", "pt-PT", "ru-RU", "sk-SK", "es-ES", "sv-SE", "ta-IN", "te-IN",
-             "th-TH", "tr-TR", "uk-UA", "vi-VN"]
+    codes = ["ar-EG","ar-SA","bg-BG","ca-ES","cs-CZ","cy-GB","da-DK","de-AT",
+             "de-CH","de-DE","el-GR","en-AU","en-CA","en-GB",
+             "en-HK","en-IE","en-IN","en-NZ","en-PH",
+             "en-SG","en-US","en-ZA","es-AR","es-CO",
+             "es-ES","es-MX","es-US","et-EE","fi-FI","fr-BE","fr-CA",
+             "fr-CH","fr-FR","ga-IE","gu-IN","he-IL","hi-IN","hr-HR","hu-HU",
+             "id-ID","it-IT","ja-JP","ko-KR","lt-LT","lv-LV","mr-IN","ms-MY","mt-MT",
+             "nb-NO","nl-BE","nl-NL","pl-PL","pt-BR","pt-PT",
+             "ro-RO","ru-RU","sk-SK","sl-SI","sv-SE","sw-KE","ta-IN","te-IN","th-TH","tr-TR",
+             "uk-UA","ur-PK","vi-VN","zh-CN","zh-HK","zh-TW"]
 
     lang2code = dict(zip(langs, codes))
 
-    speakers = {
-        "arabic":  ["ar-XA-Wavenet-A FEMALE","ar-XA-Wavenet-B MALE","ar-XA-Wavenet-C MALE","ar-XA-Standard-A FEMALE","ar-XA-Standard-B MALE","ar-XA-Standard-C MALE","ar-XA-Standard-D FEMALE"],
-        "bengali": ["bn-IN-Standard-A FEMALE","bn-IN-Standard-B MALE"],
-        "chinese": ["yue-HK-Standard-A FEMALE","yue-HK-Standard-B MALE","yue-HK-Standard-C FEMALE","yue-HK-Standard-D MALE"],
-        "czech": ["cs-CZ-Wavenet-A FEMALE","cs-CZ-Standard-A FEMALE"],
-        "danish": ["da-DK-Wavenet-A FEMALE","da-DK-Wavenet-C MALE","da-DK-Wavenet-D FEMALE","da-DK-Wavenet-E FEMALE","da-DK-Standard-A FEMALE","da-DK-Standard-C MALE","da-DK-Standard-D FEMALE","da-DK-Standard-E FEMALE"],
-        "dutch": ["nl-NL-Wavenet-A FEMALE","nl-NL-Wavenet-B MALE","nl-NL-Wavenet-C MALE","nl-NL-Wavenet-D FEMALE","nl-NL-Wavenet-E FEMALE","nl-NL-Standard-A FEMALE","nl-NL-Standard-B MALE","nl-NL-Standard-C MALE","nl-NL-Standard-D FEMALE","nl-NL-Standard-E FEMALE"],
-        "english_aus": ["en-AU-Wavenet-A FEMALE","en-AU-Wavenet-B MALE","en-AU-Wavenet-C FEMALE","en-AU-Wavenet-D MALE","en-AU-Standard-A FEMALE","en-AU-Standard-B MALE","en-AU-Standard-C FEMALE","en-AU-Standard-D MALE"],
-        "english_ind": ["en-IN-Wavenet-A FEMALE","en-IN-Wavenet-B MALE","en-IN-Wavenet-C MALE","en-IN-Wavenet-D FEMALE","en-IN-Standard-A FEMALE","en-IN-Standard-B MALE","en-IN-Standard-C MALE","en-IN-Standard-D FEMALE"],
-        "english_uk": ["en-GB-Wavenet-A FEMALE","en-GB-Wavenet-B MALE","en-GB-Wavenet-C FEMALE","en-GB-Wavenet-D MALE","en-GB-Wavenet-F FEMALE","en-GB-Standard-A FEMALE","en-GB-Standard-B MALE","en-GB-Standard-C FEMALE","en-GB-Standard-D MALE","en-GB-Standard-F FEMALE"],
-        "english_us": ["en-US-Wavenet-A MALE","en-US-Wavenet-B MALE","en-US-Wavenet-C FEMALE","en-US-Wavenet-D MALE","en-US-Wavenet-E FEMALE","en-US-Wavenet-F FEMALE","en-US-Wavenet-G FEMALE","en-US-Wavenet-H FEMALE","en-US-Wavenet-I MALE","en-US-Wavenet-J MALE" ,"en-US-Standard-B MALE","en-US-Standard-C FEMALE","en-US-Standard-D MALE","en-US-Standard-E FEMALE","en-US-Standard-G FEMALE","en-US-Standard-H FEMALE","en-US-Standard-I MALE","en-US-Standard-J MALE"],
-        "filipino": ["fil-PH-Wavenet-A FEMALE","fil-PH-Wavenet-B FEMALE","fil-PH-Wavenet-C MALE","fil-PH-Wavenet-D MALE","fil-PH-Standard-A FEMALE","fil-PH-Standard-B FEMALE","fil-PH-Standard-C MALE","fil-PH-Standard-D MALE"],
-        "finnish": ["fi-FI-Wavenet-A FEMALE","fi-FI-Standard-A FEMALE"],
-        "french_canada": ["fr-CA-Wavenet-A FEMALE","fr-CA-Wavenet-B MALE","fr-CA-Wavenet-C FEMALE","fr-CA-Wavenet-D MALE","fr-CA-Standard-A FEMALE","fr-CA-Standard-B MALE","fr-CA-Standard-C FEMALE","fr-CA-Standard-D MALE"],
-        "french": ["fr-FR-Wavenet-A FEMALE","fr-FR-Wavenet-B MALE","fr-FR-Wavenet-C FEMALE","fr-FR-Wavenet-D MALE","fr-FR-Wavenet-E FEMALE","fr-FR-Standard-A FEMALE","fr-FR-Standard-B MALE","fr-FR-Standard-C FEMALE","fr-FR-Standard-D MALE","fr-FR-Standard-E FEMALE"],
-        "german": ["de-DE-Wavenet-A FEMALE","de-DE-Wavenet-B MALE","de-DE-Wavenet-C FEMALE","de-DE-Wavenet-D MALE","de-DE-Wavenet-E MALE","de-DE-Wavenet-F FEMALE","de-DE-Standard-A FEMALE","de-DE-Standard-B MALE","de-DE-Standard-E MALE","de-DE-Standard-F FEMALE"],
-        "greek": ["el-GR-Wavenet-A FEMALE","el-GR-Standard-A FEMALE"],
-        "gujarati": ["gu-IN-Standard-A FEMALE","gu-IN-Standard-B MALE"],
-        "hindi": ["hi-IN-Wavenet-A FEMALE","hi-IN-Wavenet-B MALE","hi-IN-Wavenet-C MALE","hi-IN-Wavenet-D FEMALE","hi-IN-Standard-A FEMALE","hi-IN-Standard-B MALE","hi-IN-Standard-C MALE","hi-IN-Standard-D FEMALE"],
-        "hungarian": ["hu-HU-Wavenet-A FEMALE","hu-HU-Standard-A FEMALE"],
-        "indonesian": ["id-ID-Wavenet-A FEMALE","id-ID-Wavenet-B MALE","id-ID-Wavenet-C MALE","id-ID-Wavenet-D FEMALE","id-ID-Standard-A FEMALE","id-ID-Standard-B MALE","id-ID-Standard-C MALE","id-ID-Standard-D FEMALE"],
-        "italian": ["it-IT-Wavenet-A FEMALE","it-IT-Wavenet-B FEMALE","it-IT-Wavenet-C MALE","it-IT-Wavenet-D MALE","it-IT-Standard-A FEMALE","it-IT-Standard-B FEMALE","it-IT-Standard-C MALE","it-IT-Standard-D MALE"],
-        "japanese": ["ja-JP-Wavenet-A FEMALE","ja-JP-Wavenet-B FEMALE","ja-JP-Wavenet-C MALE","ja-JP-Wavenet-D MALE","ja-JP-Standard-A FEMALE","ja-JP-Standard-B FEMALE","ja-JP-Standard-C MALE","ja-JP-Standard-D MALE"],
-        "kannada": ["kn-IN-Standard-A FEMALE","kn-IN-Standard-B MALE"],
-        "korean": ["ko-KR-Wavenet-A FEMALE","ko-KR-Wavenet-B FEMALE","ko-KR-Wavenet-C MALE","ko-KR-Wavenet-D MALE","ko-KR-Standard-A FEMALE","ko-KR-Standard-B FEMALE","ko-KR-Standard-C MALE","ko-KR-Standard-D MALE"],
-        "malayalam": ["ml-IN-Standard-A FEMALE","ml-IN-Standard-B MALE"],
-        "mandarin": ["cmn-CN-Wavenet-A FEMALE","cmn-CN-Wavenet-B MALE","cmn-CN-Wavenet-C MALE","cmn-CN-Wavenet-D FEMALE", "cmn-CN-Standard-A FEMALE","cmn-CN-Standard-B MALE","cmn-CN-Standard-C MALE","cmn-CN-Standard-D FEMALE"],
-        "mandarin_taiwan": ["cmn-TW-Wavenet-A FEMALE","cmn-TW-Wavenet-B MALE","cmn-TW-Wavenet-C MALE", "cmn-TW-Standard-A FEMALE","cmn-TW-Standard-B MALE","cmn-TW-Standard-C MALE"],
-        "norwegian": ["nb-NO-Wavenet-A FEMALE","nb-NO-Wavenet-B MALE","nb-no-Wavenet-E FEMALE","nb-NO-Wavenet-C FEMALE","nb-NO-Wavenet-D MALE","nb-NO-Standard-A FEMALE","nb-NO-Standard-B MALE","nb-NO-Standard-C FEMALE","nb-NO-Standard-D MALE","nb-no-Standard-E FEMALE"],
-        "polish": ["pl-PL-Wavenet-A FEMALE","pl-PL-Wavenet-B MALE","pl-PL-Wavenet-C MALE","pl-PL-Wavenet-D FEMALE","pl-PL-Wavenet-E FEMALE","pl-PL-Standard-A FEMALE","pl-PL-Standard-B MALE","pl-PL-Standard-C MALE","pl-PL-Standard-D FEMALE","pl-PL-Standard-E FEMALE"],
-        "portuguese_brazil": ["pt-BR-Wavenet-A FEMALE","pt-BR-Standard-A FEMALE"],
-        "portuguese": ["pt-PT-Wavenet-A FEMALE","pt-PT-Wavenet-B MALE","pt-PT-Wavenet-C MALE","pt-PT-Wavenet-D FEMALE","pt-PT-Standard-A FEMALE","pt-PT-Standard-B MALE","pt-PT-Standard-C MALE","pt-PT-Standard-D FEMALE"],
-        "russian": ["ru-RU-Wavenet-A FEMALE","ru-RU-Wavenet-B MALE","ru-RU-Wavenet-C FEMALE","ru-RU-Wavenet-D MALE","ru-RU-Wavenet-E FEMALE","ru-RU-Standard-A FEMALE","ru-RU-Standard-B MALE","ru-RU-Standard-C FEMALE","ru-RU-Standard-D MALE","ru-RU-Standard-E FEMALE"],
-        "slovak": ["sk-SK-Wavenet-A FEMALE","sk-SK-Standard-A FEMALE"],
-        "spanish": ["es-ES-Wavenet-B MALE","es-ES-Standard-A FEMALE","es-ES-Standard-B MALE"],
-        "swedish": ["sv-SE-Wavenet-A FEMALE","sv-SE-Standard-A FEMALE"],
-        "tamil": ["ta-IN-Standard-A FEMALE","ta-IN-Standard-B MALE"],
-        "telugu": ["te-IN-Standard-A FEMALE","te-IN-Standard-B MALE"],
-        "thai": ["th-TH-Standard-A FEMALE"],
-        "turkish": ["tr-TR-Wavenet-A FEMALE","tr-TR-Wavenet-B MALE","tr-TR-Wavenet-C FEMALE","tr-TR-Wavenet-D FEMALE","tr-TR-Wavenet-E MALE","tr-TR-Standard-A FEMALE","tr-TR-Standard-B MALE","tr-TR-Standard-C FEMALE","tr-TR-Standard-D FEMALE","tr-TR-Standard-E MALE"],
-        "ukrainian": ["uk-UA-Wavenet-A FEMALE","uk-UA-Standard-A FEMALE"],
-        "vietnamese": ["vi-VN-Wavenet-A FEMALE","vi-VN-Wavenet-B MALE","vi-VN-Wavenet-C FEMALE","vi-VN-Wavenet-D MALE","vi-VN-Standard-A FEMALE FEMALE","vi-VN-Standard-B MALE","vi-VN-Standard-C FEMALE","vi-VN-Standard-D MALE"]
-    }
+    all_speakers = ["ar-EG-SalmaNeural Female","ar-EG-ShakirNeural Male","ar-SA-HamedNeural Male","ar-SA-ZariyahNeural Female","bg-BG-BorislavNeural Male",
+                    "bg-BG-KalinaNeural Female","ca-ES-JoanaNeural Female","ca-ES-AlbaNeural Female","ca-ES-EnricNeural Male","cs-CZ-AntoninNeural Male",
+                    "cs-CZ-VlastaNeural Female","cy-GB-AledNeural Male","cy-GB-NiaNeural Female","da-DK-ChristelNeural Female","da-DK-JeppeNeural Male",
+                    "de-AT-IngridNeural Female","de-AT-JonasNeural Male","de-CH-JanNeural Male","de-CH-LeniNeural Female","de-DE-KatjaNeural Female",
+                    "de-DE-ConradNeural Male","el-GR-AthinaNeural Female","el-GR-NestorasNeural Male","en-AU-NatashaNeural Female","en-AU-WilliamNeural Male",
+                    "en-CA-ClaraNeural Female","en-CA-LiamNeural Male","en-GB-LibbyNeural Female","en-GB-MiaNeural Female","en-GB-RyanNeural Male",
+                    "en-HK-SamNeural Male","en-HK-YanNeural Female","en-IE-ConnorNeural Male","en-IE-EmilyNeural Female","en-IN-NeerjaNeural Female",
+                    "en-IN-PrabhatNeural Male","en-NZ-MitchellNeural Male","en-NZ-MollyNeural Female","en-PH-JamesNeural Male","en-PH-RosaNeural Female",
+                    "en-SG-LunaNeural Female","en-SG-WayneNeural Male","en-US-JennyNeural Female","en-US-JennyMultilingualNeural Female","en-US-GuyNeural Male",
+                    "en-US-AriaNeural Female","en-US-AmberNeural Female","en-US-AnaNeural Female","en-US-AshleyNeural Female","en-US-BrandonNeural Male",
+                    "en-US-ChristopherNeural Male","en-US-CoraNeural Female","en-US-ElizabethNeural Female","en-US-EricNeural Male","en-US-JacobNeural Male",
+                    "en-US-MichelleNeural Female","en-US-MonicaNeural Female","en-ZA-LeahNeural Female","en-ZA-LukeNeural Male","es-AR-ElenaNeural Female",
+                    "es-AR-TomasNeural Male","es-CO-GonzaloNeural Male","es-CO-SalomeNeural Female","es-ES-AlvaroNeural Male","es-ES-ElviraNeural Female",
+                    "es-MX-DaliaNeural Female","es-MX-JorgeNeural Male","es-US-AlonsoNeural Male","es-US-PalomaNeural Female","et-EE-AnuNeural Female",
+                    "et-EE-KertNeural Male","fi-FI-SelmaNeural Female","fi-FI-HarriNeural Male","fi-FI-NooraNeural Female","fr-BE-CharlineNeural Female",
+                    "fr-BE-GerardNeural Male","fr-CA-SylvieNeural Female","fr-CA-AntoineNeural Male","fr-CA-JeanNeural Male","fr-CH-ArianeNeural Female",
+                    "fr-CH-FabriceNeural Male","fr-FR-DeniseNeural Female","fr-FR-HenriNeural Male","ga-IE-ColmNeural Male","ga-IE-OrlaNeural Female",
+                    "gu-IN-DhwaniNeural Female","gu-IN-NiranjanNeural Male","he-IL-AvriNeural Male","he-IL-HilaNeural Male","hi-IN-MadhurNeural Male",
+                    "hi-IN-SwaraNeural Female","hr-HR-GabrijelaNeural Female","hr-HR-SreckoNeural Male","hu-HU-NoemiNeural Female","hu-HU-TamasNeural Male",
+                    "id-ID-ArdiNeural Female","id-ID-GadisNeural Male","it-IT-IsabellaNeural Female","it-IT-DiegoNeural Male","it-IT-ElsaNeural Female",
+                    "ja-JP-NanamiNeural Female","ja-JP-KeitaNeural Male","ko-KR-SunHiNeural Female","ko-KR-InJoonNeural Male","lt-LT-LeonasNeural Male",
+                    "lt-LT-OnaNeural Female","lv-LV-EveritaNeural Female","lv-LV-NilsNeural Male","mr-IN-AarohiNeural Female","mr-IN-ManoharNeural Male",
+                    "ms-MY-OsmanNeural Male","ms-MY-YasminNeural Female","mt-MT-GraceNeural Female","mt-MT-JosephNeural Male","nb-NO-PernilleNeural Female",
+                    "nb-NO-FinnNeural Male","nb-NO-IselinNeural Female","nl-BE-ArnaudNeural Male","nl-BE-DenaNeural Female","nl-NL-ColetteNeural Female",
+                    "nl-NL-FennaNeural Female","nl-NL-MaartenNeural Male","pl-PL-AgnieszkaNeural Female","pl-PL-MarekNeural Male","pl-PL-ZofiaNeural Female",
+                    "pt-BR-FranciscaNeural Female","pt-BR-AntonioNeural Male","pt-PT-DuarteNeural Male","pt-PT-FernandaNeural Female","pt-PT-RaquelNeural Female",
+                    "ro-RO-AlinaNeural Female","ro-RO-EmilNeural Male","ru-RU-SvetlanaNeural Female","ru-RU-DariyaNeural Female","ru-RU-DmitryNeural Male",
+                    "sk-SK-LukasNeural Male","sk-SK-ViktoriaNeural Female","sl-SI-PetraNeural Female","sl-SI-RokNeural Male","sv-SE-SofieNeural Female",
+                    "sv-SE-HilleviNeural Female","sv-SE-MattiasNeural Male","sw-KE-RafikiNeural Male","sw-KE-ZuriNeural Female","ta-IN-PallaviNeural Female",
+                    "ta-IN-ValluvarNeural Male","te-IN-MohanNeural Male","te-IN-ShrutiNeural Female","th-TH-PremwadeeNeural Female","th-TH-AcharaNeural Female",
+                    "th-TH-NiwatNeural Male","tr-TR-AhmetNeural Male","tr-TR-EmelNeural Female","uk-UA-OstapNeural Male","uk-UA-PolinaNeural Female",
+                    "ur-PK-AsadNeural Male","ur-PK-UzmaNeural Female","vi-VN-HoaiMyNeural Female","vi-VN-NamMinhNeural Male","zh-CN-XiaoxiaoNeural Female",
+                    "zh-CN-YunyangNeural Male","zh-CN-XiaohanNeural Female","zh-CN-XiaomoNeural Female","zh-CN-XiaoruiNeural Female","zh-CN-XiaoxuanNeural Female",
+                    "zh-CN-XiaoyouNeural Female","zh-CN-YunxiNeural Male","zh-CN-YunyeNeural Male","zh-HK-HiuMaanNeural Female","zh-HK-HiuGaaiNeural Female",
+                    "zh-HK-WanLungNeural Male","zh-TW-HsiaoChenNeural Female","zh-TW-HsiaoYuNeural Female","zh-TW-YunJheNeural Male"]
+
+    speakers = defaultdict(list)
+    for lang, code in lang2code.items():
+        relevant_speakers = []
+        for s in all_speakers:
+            if code in s: relevant_speakers.append(s)
+        speakers[lang] = relevant_speakers
+
+
+# Internal Cell
+# class TextDicts:
+#     langs = ["arabic", "bengali", "chinese", "czech", "danish", "dutch", "english_aus", "english_ind",
+#              "english_uk", "english_us", "filipino", "finnish", "french_canada", "french", "german",
+#              "greek", "gujarati", "hindi", "hungarian", "indonesian", "italian", "japanese", "kannada",
+#              "korean", "malayalam", "mandarin", "mandarin_taiwan", "norwegian", "polish", "portuguese_brazil", "portuguese",
+#              "russian", "slovak", "spanish", "swedish", "tamil", "telugu", "thai", "turkish", "ukrainian"]
+
+#     codes = ["ar-XA", "bn-IN", "yue-HK", "cs-CZ", "da-DK", "nl-NL", "en-AU", "en-IN", "en-GB",
+#              "en-US", "fil-PH", "fi-FI", "fr-CA", "fr-FR", "de-DE", "el-GR", "gu-IN", "hi-IN",
+#              "hu-HU", "id-ID", "it-IT", "ja-JP", "kn-IN", "ko-KR", "ml-IN", "cmn-CN", "cmn-TW", "nb-NO",
+#              "pl-PL", "pt-BR", "pt-PT", "ru-RU", "sk-SK", "es-ES", "sv-SE", "ta-IN", "te-IN",
+#              "th-TH", "tr-TR", "uk-UA", "vi-VN"]
+
+#     lang2code = dict(zip(langs, codes))
+
+#     speakers = {
+#         "arabic":  ["ar-XA-Wavenet-A FEMALE","ar-XA-Wavenet-B MALE","ar-XA-Wavenet-C MALE","ar-XA-Standard-A FEMALE","ar-XA-Standard-B MALE","ar-XA-Standard-C MALE","ar-XA-Standard-D FEMALE"],
+#         "bengali": ["bn-IN-Standard-A FEMALE","bn-IN-Standard-B MALE"],
+#         "chinese": ["yue-HK-Standard-A FEMALE","yue-HK-Standard-B MALE","yue-HK-Standard-C FEMALE","yue-HK-Standard-D MALE"],
+#         "czech": ["cs-CZ-Wavenet-A FEMALE","cs-CZ-Standard-A FEMALE"],
+#         "danish": ["da-DK-Wavenet-A FEMALE","da-DK-Wavenet-C MALE","da-DK-Wavenet-D FEMALE","da-DK-Wavenet-E FEMALE","da-DK-Standard-A FEMALE","da-DK-Standard-C MALE","da-DK-Standard-D FEMALE","da-DK-Standard-E FEMALE"],
+#         "dutch": ["nl-NL-Wavenet-A FEMALE","nl-NL-Wavenet-B MALE","nl-NL-Wavenet-C MALE","nl-NL-Wavenet-D FEMALE","nl-NL-Wavenet-E FEMALE","nl-NL-Standard-A FEMALE","nl-NL-Standard-B MALE","nl-NL-Standard-C MALE","nl-NL-Standard-D FEMALE","nl-NL-Standard-E FEMALE"],
+#         "english_aus": ["en-AU-Wavenet-A FEMALE","en-AU-Wavenet-B MALE","en-AU-Wavenet-C FEMALE","en-AU-Wavenet-D MALE","en-AU-Standard-A FEMALE","en-AU-Standard-B MALE","en-AU-Standard-C FEMALE","en-AU-Standard-D MALE"],
+#         "english_ind": ["en-IN-Wavenet-A FEMALE","en-IN-Wavenet-B MALE","en-IN-Wavenet-C MALE","en-IN-Wavenet-D FEMALE","en-IN-Standard-A FEMALE","en-IN-Standard-B MALE","en-IN-Standard-C MALE","en-IN-Standard-D FEMALE"],
+#         "english_uk": ["en-GB-Wavenet-A FEMALE","en-GB-Wavenet-B MALE","en-GB-Wavenet-C FEMALE","en-GB-Wavenet-D MALE","en-GB-Wavenet-F FEMALE","en-GB-Standard-A FEMALE","en-GB-Standard-B MALE","en-GB-Standard-C FEMALE","en-GB-Standard-D MALE","en-GB-Standard-F FEMALE"],
+#         "english_us": ["en-US-Wavenet-A MALE","en-US-Wavenet-B MALE","en-US-Wavenet-C FEMALE","en-US-Wavenet-D MALE","en-US-Wavenet-E FEMALE","en-US-Wavenet-F FEMALE","en-US-Wavenet-G FEMALE","en-US-Wavenet-H FEMALE","en-US-Wavenet-I MALE","en-US-Wavenet-J MALE" ,"en-US-Standard-B MALE","en-US-Standard-C FEMALE","en-US-Standard-D MALE","en-US-Standard-E FEMALE","en-US-Standard-G FEMALE","en-US-Standard-H FEMALE","en-US-Standard-I MALE","en-US-Standard-J MALE"],
+#         "filipino": ["fil-PH-Wavenet-A FEMALE","fil-PH-Wavenet-B FEMALE","fil-PH-Wavenet-C MALE","fil-PH-Wavenet-D MALE","fil-PH-Standard-A FEMALE","fil-PH-Standard-B FEMALE","fil-PH-Standard-C MALE","fil-PH-Standard-D MALE"],
+#         "finnish": ["fi-FI-Wavenet-A FEMALE","fi-FI-Standard-A FEMALE"],
+#         "french_canada": ["fr-CA-Wavenet-A FEMALE","fr-CA-Wavenet-B MALE","fr-CA-Wavenet-C FEMALE","fr-CA-Wavenet-D MALE","fr-CA-Standard-A FEMALE","fr-CA-Standard-B MALE","fr-CA-Standard-C FEMALE","fr-CA-Standard-D MALE"],
+#         "french": ["fr-FR-Wavenet-A FEMALE","fr-FR-Wavenet-B MALE","fr-FR-Wavenet-C FEMALE","fr-FR-Wavenet-D MALE","fr-FR-Wavenet-E FEMALE","fr-FR-Standard-A FEMALE","fr-FR-Standard-B MALE","fr-FR-Standard-C FEMALE","fr-FR-Standard-D MALE","fr-FR-Standard-E FEMALE"],
+#         "german": ["de-DE-Wavenet-A FEMALE","de-DE-Wavenet-B MALE","de-DE-Wavenet-C FEMALE","de-DE-Wavenet-D MALE","de-DE-Wavenet-E MALE","de-DE-Wavenet-F FEMALE","de-DE-Standard-A FEMALE","de-DE-Standard-B MALE","de-DE-Standard-E MALE","de-DE-Standard-F FEMALE"],
+#         "greek": ["el-GR-Wavenet-A FEMALE","el-GR-Standard-A FEMALE"],
+#         "gujarati": ["gu-IN-Standard-A FEMALE","gu-IN-Standard-B MALE"],
+#         "hindi": ["hi-IN-Wavenet-A FEMALE","hi-IN-Wavenet-B MALE","hi-IN-Wavenet-C MALE","hi-IN-Wavenet-D FEMALE","hi-IN-Standard-A FEMALE","hi-IN-Standard-B MALE","hi-IN-Standard-C MALE","hi-IN-Standard-D FEMALE"],
+#         "hungarian": ["hu-HU-Wavenet-A FEMALE","hu-HU-Standard-A FEMALE"],
+#         "indonesian": ["id-ID-Wavenet-A FEMALE","id-ID-Wavenet-B MALE","id-ID-Wavenet-C MALE","id-ID-Wavenet-D FEMALE","id-ID-Standard-A FEMALE","id-ID-Standard-B MALE","id-ID-Standard-C MALE","id-ID-Standard-D FEMALE"],
+#         "italian": ["it-IT-Wavenet-A FEMALE","it-IT-Wavenet-B FEMALE","it-IT-Wavenet-C MALE","it-IT-Wavenet-D MALE","it-IT-Standard-A FEMALE","it-IT-Standard-B FEMALE","it-IT-Standard-C MALE","it-IT-Standard-D MALE"],
+#         "japanese": ["ja-JP-Wavenet-A FEMALE","ja-JP-Wavenet-B FEMALE","ja-JP-Wavenet-C MALE","ja-JP-Wavenet-D MALE","ja-JP-Standard-A FEMALE","ja-JP-Standard-B FEMALE","ja-JP-Standard-C MALE","ja-JP-Standard-D MALE"],
+#         "kannada": ["kn-IN-Standard-A FEMALE","kn-IN-Standard-B MALE"],
+#         "korean": ["ko-KR-Wavenet-A FEMALE","ko-KR-Wavenet-B FEMALE","ko-KR-Wavenet-C MALE","ko-KR-Wavenet-D MALE","ko-KR-Standard-A FEMALE","ko-KR-Standard-B FEMALE","ko-KR-Standard-C MALE","ko-KR-Standard-D MALE"],
+#         "malayalam": ["ml-IN-Standard-A FEMALE","ml-IN-Standard-B MALE"],
+#         "mandarin": ["cmn-CN-Wavenet-A FEMALE","cmn-CN-Wavenet-B MALE","cmn-CN-Wavenet-C MALE","cmn-CN-Wavenet-D FEMALE", "cmn-CN-Standard-A FEMALE","cmn-CN-Standard-B MALE","cmn-CN-Standard-C MALE","cmn-CN-Standard-D FEMALE"],
+#         "mandarin_taiwan": ["cmn-TW-Wavenet-A FEMALE","cmn-TW-Wavenet-B MALE","cmn-TW-Wavenet-C MALE", "cmn-TW-Standard-A FEMALE","cmn-TW-Standard-B MALE","cmn-TW-Standard-C MALE"],
+#         "norwegian": ["nb-NO-Wavenet-A FEMALE","nb-NO-Wavenet-B MALE","nb-no-Wavenet-E FEMALE","nb-NO-Wavenet-C FEMALE","nb-NO-Wavenet-D MALE","nb-NO-Standard-A FEMALE","nb-NO-Standard-B MALE","nb-NO-Standard-C FEMALE","nb-NO-Standard-D MALE","nb-no-Standard-E FEMALE"],
+#         "polish": ["pl-PL-Wavenet-A FEMALE","pl-PL-Wavenet-B MALE","pl-PL-Wavenet-C MALE","pl-PL-Wavenet-D FEMALE","pl-PL-Wavenet-E FEMALE","pl-PL-Standard-A FEMALE","pl-PL-Standard-B MALE","pl-PL-Standard-C MALE","pl-PL-Standard-D FEMALE","pl-PL-Standard-E FEMALE"],
+#         "portuguese_brazil": ["pt-BR-Wavenet-A FEMALE","pt-BR-Standard-A FEMALE"],
+#         "portuguese": ["pt-PT-Wavenet-A FEMALE","pt-PT-Wavenet-B MALE","pt-PT-Wavenet-C MALE","pt-PT-Wavenet-D FEMALE","pt-PT-Standard-A FEMALE","pt-PT-Standard-B MALE","pt-PT-Standard-C MALE","pt-PT-Standard-D FEMALE"],
+#         "russian": ["ru-RU-Wavenet-A FEMALE","ru-RU-Wavenet-B MALE","ru-RU-Wavenet-C FEMALE","ru-RU-Wavenet-D MALE","ru-RU-Wavenet-E FEMALE","ru-RU-Standard-A FEMALE","ru-RU-Standard-B MALE","ru-RU-Standard-C FEMALE","ru-RU-Standard-D MALE","ru-RU-Standard-E FEMALE"],
+#         "slovak": ["sk-SK-Wavenet-A FEMALE","sk-SK-Standard-A FEMALE"],
+#         "spanish": ["es-ES-Wavenet-B MALE","es-ES-Standard-A FEMALE","es-ES-Standard-B MALE"],
+#         "swedish": ["sv-SE-Wavenet-A FEMALE","sv-SE-Standard-A FEMALE"],
+#         "tamil": ["ta-IN-Standard-A FEMALE","ta-IN-Standard-B MALE"],
+#         "telugu": ["te-IN-Standard-A FEMALE","te-IN-Standard-B MALE"],
+#         "thai": ["th-TH-Standard-A FEMALE"],
+#         "turkish": ["tr-TR-Wavenet-A FEMALE","tr-TR-Wavenet-B MALE","tr-TR-Wavenet-C FEMALE","tr-TR-Wavenet-D FEMALE","tr-TR-Wavenet-E MALE","tr-TR-Standard-A FEMALE","tr-TR-Standard-B MALE","tr-TR-Standard-C FEMALE","tr-TR-Standard-D FEMALE","tr-TR-Standard-E MALE"],
+#         "ukrainian": ["uk-UA-Wavenet-A FEMALE","uk-UA-Standard-A FEMALE"],
+#         "vietnamese": ["vi-VN-Wavenet-A FEMALE","vi-VN-Wavenet-B MALE","vi-VN-Wavenet-C FEMALE","vi-VN-Wavenet-D MALE","vi-VN-Standard-A FEMALE FEMALE","vi-VN-Standard-B MALE","vi-VN-Standard-C FEMALE","vi-VN-Standard-D MALE"]
+#     }
 
 # Cell
 def to_hhmmss(x: int) -> str:
