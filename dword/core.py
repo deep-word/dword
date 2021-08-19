@@ -166,18 +166,20 @@ class DeepWord:
 #             os.rename(out_file, new_file)
 #             print("downloaded youtube audio successfully!")
 
-    def download_audio_samples(self):
+    def download_audio_samples(self, folder = 'audio_samples'):
         """Download all the audio samples available on the DeepWord website
         """
-        folder = Path().cwd() / 'audio_samples'
-        folder.mkdir(exist_ok = True)
+        path = Path().cwd()
+
+        folder = Path(folder)
+        folder.mkdir(parents = True, exist_ok = True)
 
         url = URLs.api_get_audio_sample
         response = self.session.post(url, headers=self.headers)
         try:
             for dic in self._process_output(response.text)['sample_audio_files']:
                 doc = self.session.get(dic['audio_url'])
-                fname = folder / (dic['title']+dic['extension'])
+                fname = path / folder / (dic['title']+dic['extension'])
                 f = open(fname,"wb")
                 f.write(doc.content)
                 f.close()
@@ -185,11 +187,13 @@ class DeepWord:
         except Exception as e:
             raise ValueError(response.text)
 
-    def download_video_actors(self):
+    def download_video_actors(self, folder = 'video_actors'):
         """Download all the video actors available on the DeepWord website.
         """
-        folder = Path().cwd() / 'video_actors'
-        folder.mkdir(exist_ok = True)
+        path = Path().cwd()
+
+        folder = Path(folder)
+        folder.mkdir(parents = True, exist_ok = True)
 
         url = URLs.api_get_video_actors
         response = self.session.post(url, headers=self.headers)
@@ -197,7 +201,7 @@ class DeepWord:
             for dic in self._process_output(response.text)['sample_video_files']:
                 with self.session.get(dic['video_url'], stream=True) as r:
                     r.raise_for_status()
-                    fname = folder / (dic['title']+dic['extension'])
+                    fname = path / folder / (dic['title']+dic['extension'])
                     with open(fname, 'wb') as f:
                         for chunk in r.iter_content(chunk_size=8192):
                             f.write(chunk)
